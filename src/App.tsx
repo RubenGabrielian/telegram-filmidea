@@ -1,41 +1,57 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import twaLogo from './assets/tapps.png'
-import viteLogo from '/vite.svg'
 import './App.css'
-
-import WebApp from '@twa-dev/sdk'
+import Button from "./components/Button"
+import {useState} from "react";
+import {RotatingLines} from "react-loader-spinner";
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [film, setFilm] = useState();
+    const [loading, setLoading] = useState(false);
 
-  return (
-    <>
-      <div>
-        <a href="https://ton.org/dev" target="_blank">
-          <img src={twaLogo} className="logo" alt="TWA logo" />
-        </a>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>TWA + Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      {/*  */}
-      <div className="card">
-        <button onClick={() => WebApp.showAlert(`Hello World! Current count is ${count}`)}>
-            Show Alert
-        </button>
-      </div>
-    </>
-  )
+    const handleGiveIdea = () => {
+        setLoading(true);
+        fetch('https://devback.filmidea.tv/api/v1/films/give-me-idea').then((res)=> {
+            return res.json()
+        }).then((response) => {
+            console.log(response.data)
+            setFilm(response.data)
+        }).finally(()=>setLoading(false));
+    }
+
+
+    return (
+        <>
+            {
+                loading ? (
+                        <RotatingLines
+                            visible={true}
+                            height="96"
+                            width="96"
+                            color="grey"
+                            strokeWidth="5"
+                            animationDuration="0.75"
+                            ariaLabel="rotating-lines-loading"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                        />
+                    ) : (
+                    !film ? (
+                        <div>
+                            <h1>Welcome to Filmidea</h1>
+                            <p>We can help you find your film</p>
+                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                        </div>
+                    ) : (
+                        <div>
+                            <h1>{film?.name || film?.alternative_name}</h1>
+                            <img src={film?.poster?.kp_preview_url} width={'100%'} style={{marginBottom: 20}} alt=""/>
+                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                        </div>
+                    )
+                )
+            }
+
+        </>
+    )
 }
 
 export default App

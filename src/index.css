@@ -37,13 +37,13 @@ h1 {
 }
 
 button {
-  border-radius: 8px;
+  border-radius: 12px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: linear-gradient(rgb(254, 190, 19) 0%, rgb(184, 132, 0) 100%);
   cursor: pointer;
   transition: border-color 0.25s;
 }
