@@ -3,8 +3,15 @@ import Button from "./components/Button"
 import {useState} from "react";
 import {RotatingLines} from "react-loader-spinner";
 
+
+interface Film {
+    name: string;
+    alternative_name: string;
+    poster: any;
+}
+
 function App() {
-    const [film, setFilm] = useState();
+    const [film, setFilm] = useState<Film>();
     const [loading, setLoading] = useState(false);
 
     const handleGiveIdea = () => {
@@ -18,21 +25,16 @@ function App() {
     }
 
 
-    // @ts-ignore
     return (
         <>
             {
                 loading ? (
                         <RotatingLines
                             visible={true}
-                            height="96"
                             width="96"
-                            color="grey"
                             strokeWidth="5"
                             animationDuration="0.75"
                             ariaLabel="rotating-lines-loading"
-                            wrapperStyle={{}}
-                            wrapperClass=""
                         />
                     ) : (
                     !film ? (
