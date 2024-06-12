@@ -1,0 +1,24 @@
+footer {
+    margin-top: 30px;
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        justify-content: center;
+        li {
+            background: rgb(15, 16, 23);
+            padding: 10px 30px;
+            border-radius: 6px;
+            a {
+                text-decoration: none;
+                color: white;
+                &:hover{
+                    color: white;
+                }
+            }
+        }
+    }
+}

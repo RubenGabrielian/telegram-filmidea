@@ -1,0 +1,55 @@
+.film {
+    img {
+        height: 260px;
+        object-fit: cover;
+        width: 90vw;
+        border-radius: 18px;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+    .poster{
+        position: relative;
+        .play {
+            cursor: pointer;
+            background: #cbcbcb70;
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+    .description {
+        padding: 0 15px;
+        p {
+            margin: 0;
+        }
+        margin-bottom: 20px;
+    }
+    .info-blocks{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 15px 50px;
+        gap: 20px;
+        .info-block {
+            border-radius: 16px;
+            padding: 16px;
+            background: rgb(15, 16, 23);
+            box-shadow: rgba(16, 24, 40, 0.08) 0px 20px 24px -4px;
+            .rating {
+                font-weight: bold;
+            }
+            .partner {
+                font-size: 12px;
+                margin-left: 5px;
+            }
+        }
+    }
+}
