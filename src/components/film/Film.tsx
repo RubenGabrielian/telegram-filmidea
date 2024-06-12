@@ -7,9 +7,12 @@ export default function FilmView({film}: { film: any }) {
             <h1>{film?.name || film?.alternative_name}</h1>
             <div className="poster">
                 <img src={film?.poster?.kp_preview_url} width={'100%'} alt=""/>
-                <div className="play">
-                    <PlayIcon/>
-                </div>
+                <a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>
+                    <div className="play">
+                        <PlayIcon/>
+                    </div>
+                </a>
+
             </div>
             <div className="info-blocks">
                 <div className="info-block">
