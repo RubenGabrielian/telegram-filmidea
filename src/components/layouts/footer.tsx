@@ -2,7 +2,7 @@ import './footer.css'
 import {Link} from "react-router-dom";
 export default function Footer () {
     return (
-        <footer>
+        <footer className={'absolute bottom-[2%] left-[50%] translate-x-[-50%]'}>
             <ul>
                 <li>
                     <Link to={'/'}>Home</Link>
