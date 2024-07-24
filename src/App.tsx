@@ -2,7 +2,7 @@ import './App.css'
 import Button from "./components/Button"
 import {useState} from "react";
 import {RotatingLines} from "react-loader-spinner";
-import FilmView from "./components/film/Film.tsx";
+// import FilmView from "./components/film/Film.tsx";
 import bg from "./assets/bg.png"
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
@@ -47,11 +47,17 @@ function App() {
                         />
                     </div>
                 ) : (
-                    <div className={'welcome'}>
-                        <h1 className={'font-bold mb-2'}>Welcome to Filmidea</h1>
-                        <p className={'mb-2'}>We can help you find your film</p>
-                        <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
-                    </div>
+                    <>
+                        <div className={'welcome'}>
+                            <h1 className={'font-bold mb-2'}>Welcome to Filmidea</h1>
+                            <p className={'mb-2'}>We can help you find your film</p>
+                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                        </div>
+                        {
+                            film ? <p></p> : ''
+                        }
+                    </>
+
                     // <div className={'welcome'}>
                     //     <FilmView film={film} />
                     //     <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
