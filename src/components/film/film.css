@@ -36,7 +36,6 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 15px 50px;
         gap: 20px;
         .info-block {
             border-radius: 16px;

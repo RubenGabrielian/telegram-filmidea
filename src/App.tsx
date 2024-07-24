@@ -6,6 +6,7 @@ import {RotatingLines} from "react-loader-spinner";
 import bg from "./assets/bg.png"
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface Film {
     name: string;
@@ -16,6 +17,7 @@ interface Film {
 function App() {
     const [film, setFilm] = useState<Film>();
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleGiveIdea = () => {
         setLoading(true);
@@ -28,7 +30,8 @@ function App() {
         }).then((response) => {
             console.log(response.data)
             setFilm(response.data)
-        }).finally(() => setLoading(false));
+            navigate(`/film/${response.data.id}`)
+        });
     }
 
 
@@ -41,9 +44,10 @@ function App() {
                         <RotatingLines
                             visible={true}
                             width="96"
-                            strokeWidth="5"
+                            strokeWidth="2"
                             animationDuration="0.75"
                             ariaLabel="rotating-lines-loading"
+                            strokeColor={'white'}
                         />
                     </div>
                 ) : (
