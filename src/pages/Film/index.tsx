@@ -1,6 +1,6 @@
 import Layout from "../../components/layouts/layout.tsx";
 import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import FilmView from "../../components/film/Film.tsx";
 
 const Film = () => {
