@@ -47,18 +47,15 @@ function App() {
                         />
                     </div>
                 ) : (
-                    !film ? (
-                        <div className={'welcome'}>
-                            <h1>Welcome to Filmidea</h1>
-                            <p>We can help you find your film</p>
-                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
-                        </div>
-                    ) : (
-                        <div className={'welcome'}>
-                            <FilmView film={film} />
-                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
-                        </div>
-                    )
+                    <div className={'welcome'}>
+                        <h1 className={'font-bold mb-2'}>Welcome to Filmidea</h1>
+                        <p className={'mb-2'}>We can help you find your film</p>
+                        <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                    </div>
+                    // <div className={'welcome'}>
+                    //     <FilmView film={film} />
+                    //     <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                    // </div>
                 )
             }
             <Footer/>
