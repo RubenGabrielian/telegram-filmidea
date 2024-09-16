@@ -10,7 +10,7 @@ footer {
         display: flex;
         align-items: center;
         gap: 20px;
-        justify-content: space-evenly;
+        justify-content: space-around;
 
         li {
             img  {
