@@ -61,11 +61,6 @@ function App() {
                             film ? <p></p> : ''
                         }
                     </>
-
-                    // <div className={'welcome'}>
-                    //     <FilmView film={film} />
-                    //     <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
-                    // </div>
                 )
             }
             <Footer/>
