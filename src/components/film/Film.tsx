@@ -13,8 +13,9 @@ export default function FilmView({film}: { film: any }) {
             <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
            <div className="genres flex gap-3 mb-3 flex-wrap">
                {
+                   // @ts-ignore
                    film?.genres?.map((genre, index) => (
-                       <div className={'genre text-[#B3BBC4]'}>{genre.name}</div>
+                       <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
                    ))
                }
                <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} min</div>
