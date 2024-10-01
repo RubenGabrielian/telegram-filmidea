@@ -1,37 +1,13 @@
 import './App.css'
 import Button from "./components/Button"
-import {useState} from "react";
 import {RotatingLines} from "react-loader-spinner";
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
-import {useNavigate} from "react-router-dom";
+import useGiveIdea from "./hooks/useGiveIdea.tsx";
 
-interface Film {
-    name: string;
-    alternative_name: string;
-    poster: any;
-}
 
 function App() {
-    const [film, setFilm] = useState<Film>();
-    const [loading, setLoading] = useState(false);
-    const navigate = useNavigate();
-
-    const handleGiveIdea = () => {
-        setLoading(true);
-        fetch('https://devback.filmidea.tv/api/v1/films/give-me-idea', {
-            headers: {
-                "X-localization": "ru"
-            }
-        }).then((res) => {
-            return res.json()
-        }).then((response) => {
-            console.log(response.data)
-            setFilm(response.data)
-            navigate(`/film/${response.data.id}`)
-        });
-    }
-
+    const { handleGiveIdea, loading } = useGiveIdea();
 
     return (
         <div className={'main'} style={{backgroundColor: `black`}}>
@@ -55,9 +31,6 @@ function App() {
                             <p className={'mb-2'}>We can help you find your film</p>
                             <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
                         </div>
-                        {
-                            film ? <p></p> : ''
-                        }
                     </>
                 )
             }

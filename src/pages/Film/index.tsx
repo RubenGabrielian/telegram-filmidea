@@ -6,9 +6,7 @@ import FilmView from "../../components/film/Film.tsx";
 const Film = () => {
 
     const {id} = useParams();
-
     const [film, setFilm] = useState<any>();
-
 
     useEffect(() => {
         fetch(`https://devback.filmidea.tv/api/v1/films/${id}`, {
