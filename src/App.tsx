@@ -2,8 +2,6 @@ import './App.css'
 import Button from "./components/Button"
 import {useState} from "react";
 import {RotatingLines} from "react-loader-spinner";
-// import FilmView from "./components/film/Film.tsx";
-import bg from "./assets/bg.png"
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
 import {useNavigate} from "react-router-dom";
