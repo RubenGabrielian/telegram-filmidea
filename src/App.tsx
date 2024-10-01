@@ -36,7 +36,7 @@ function App() {
 
 
     return (
-        <div className={'main'} style={{backgroundImage: `url(${bg})`}}>
+        <div className={'main'} style={{backgroundColor: `black`}}>
             <Header/>
             {
                 loading ? (

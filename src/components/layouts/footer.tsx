@@ -1,8 +1,8 @@
 import './footer.css'
 import {Link} from "react-router-dom";
-import SearchIcon from "../svgs/SearchIcon.tsx";
+import LogoIcon from "../svgs/LogoIcon.tsx";
 import HomeIcon from "../svgs/HomeIcon.tsx";
-import UserIcon from "../svgs/UserIcon.tsx";
+import SearchIcon from "../svgs/SearchIcon.tsx";
 
 export default function Footer () {
     return (
@@ -14,13 +14,13 @@ export default function Footer () {
                     </Link>
                 </li>
                 <li>
-                  <div>
-                      <SearchIcon />
+                  <div className={'logo'}>
+                      <LogoIcon />
                   </div>
                 </li>
                 <li>
                     <Link to={'/'}>
-                        <UserIcon />
+                        <SearchIcon/>
                     </Link>
                 </li>
             </ul>

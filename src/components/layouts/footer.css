@@ -17,7 +17,7 @@ footer {
                 width: 30px;
             }
             svg {
-                width: 50px;
+                /*width: 100px;*/
             }
             a {
                 text-decoration: none;
@@ -25,6 +25,10 @@ footer {
                 &:hover{
                     color: white;
                 }
+            }
+            .logo {
+                position: relative;
+                top: -40px;
             }
         }
     }
