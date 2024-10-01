@@ -23,10 +23,6 @@
         }
     }
     .description {
-        padding: 0 15px;
-        p {
-            margin: 0;
-        }
         margin-bottom: 20px;
     }
     .info-blocks{

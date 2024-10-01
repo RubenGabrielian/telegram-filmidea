@@ -15,7 +15,7 @@ export default function Footer () {
     };
 
     return (
-        <footer className={'absolute bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
+        <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
             {
                 loading ? (
                     <div className="loading">

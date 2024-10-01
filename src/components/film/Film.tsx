@@ -9,7 +9,7 @@ import Emoji4 from "../../assets/emoji4.svg";
 
 export default function FilmView({film}: { film: any }) {
     return (
-        <div className={'film container px-6'}>
+        <div className={'film container px-6 pb-[120px]'}>
             <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
            <div className="genres flex gap-3 mb-3 flex-wrap">
                {
@@ -59,11 +59,11 @@ export default function FilmView({film}: { film: any }) {
                 {/*    className={'partner'}>IMDB</span>*/}
                 {/*</div>*/}
             </div>
-            <div className="description">
-                <p>
-                    <b>Description:</b>
+            <div className="description bg-[#0F1017] p-4 rounded-md">
+                <p className={'mb-3'}>
+                    <b>Description</b>
                 </p>
-                <p>{film?.description}</p>
+                <p className={'text-[#8E9BA7]'}>{film?.description}</p>
             </div>
 
         </div>
