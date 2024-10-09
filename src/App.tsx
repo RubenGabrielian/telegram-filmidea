@@ -4,10 +4,20 @@ import {RotatingLines} from "react-loader-spinner";
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
 import useGiveIdea from "./hooks/useGiveIdea.tsx";
-
+import AvatarsImg from "./assets/home-avatars.png"
+import {useEffect} from "react";
+import AxiosInstance from "./api/axiosInstance.ts";
+import WebApp from "@twa-dev/sdk";
 
 function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
+
+    useEffect(() => {
+        console.log(WebApp?.initDataUnsafe?.user);
+        AxiosInstance.post('auth/telegram').then((res) => {
+            console.log(res)
+        })
+    }, []);
 
     return (
         <div className={'main'} style={{backgroundColor: `black`}}>
@@ -27,9 +37,14 @@ function App() {
                 ) : (
                     <>
                         <div className={'welcome'}>
-                            <h1 className={'font-bold mb-2'}>Welcome to Filmidea</h1>
-                            <p className={'mb-2'}>We can help you find your film</p>
-                            <Button text={'Give me an idea'} onclick={handleGiveIdea}/>
+                            <div className={'flex flex-wrap justify-center'}>
+                                <h1 className={'font-bold mb-2'}>Ищете что</h1>
+                                <div>
+                                    <img src={AvatarsImg} alt=""/>
+                                </div>
+                                <h1 className={'font-bold mb-2'}>посмотреть? </h1>
+                            </div>
+                            <Button text={'Дайте мне идею'} onclick={handleGiveIdea}/>
                         </div>
                     </>
                 )
