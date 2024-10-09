@@ -7,4 +7,17 @@ const axiosInstance = axios.create({
     },
 });
 
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('authToken'); // Get token from localStorage
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`; // Add Bearer token to Authorization header
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 export default axiosInstance;

@@ -26,6 +26,8 @@ function App() {
             hash
         }).then((res) => {
             console.log(res)
+            localStorage.setItem('authToken', res.data?.data?.token);
+
         })
     }, []);
 

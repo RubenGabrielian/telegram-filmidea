@@ -32,8 +32,10 @@ export default function FilmView({film}: { film: any }) {
                 <div className="like action-btn">
                     <LikeIcon/>
                 </div>
-                <div className="share action-btn">
-                    <ShareIcon />
+                <div className="share action-btn">'
+                    <a href={`https://t.me/share/url?url={https://stackoverflow.com/questions/78159682/how-to-implement-click-to-share-in-telegram-mini-app/78495747#78495747}&text={ruben}`}>
+                        <ShareIcon />
+                    </a>
                 </div>
             </div>
             <div className="emojies flex items-center justify-between">
