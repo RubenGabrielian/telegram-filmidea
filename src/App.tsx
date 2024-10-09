@@ -8,13 +8,23 @@ import AvatarsImg from "./assets/home-avatars.png"
 import {useEffect} from "react";
 import AxiosInstance from "./api/axiosInstance.ts";
 import WebApp from "@twa-dev/sdk";
+import {SECRET} from "./consts.ts";
+import {sha512} from "js-sha512";
 
 function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
 
     useEffect(() => {
-        console.log(WebApp?.initDataUnsafe?.user);
-        AxiosInstance.post('auth/telegram').then((res) => {
+        const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
+        const connectedString = user?.id + user?.first_name + user?.last_name + SECRET;
+        const hash = sha512(connectedString);
+        AxiosInstance.post('auth/telegram',{
+            id: user?.id,
+            first_name: user?.first_name,
+            last_name: user?.last_name,
+            username: user?.username,
+            hash
+        }).then((res) => {
             console.log(res)
         })
     }, []);
