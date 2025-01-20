@@ -33,7 +33,7 @@ export default function FilmView({film}: { film: any }) {
             {
                 iframe ? (
                     <div className={'iframe-modal'}>
-                        <div className="close" onClick={()=>setIframe('')}>
+                        <div className="close" onClick={()=>setIframe(null)}>
                             <CloseIcon />
                         </div>
                         <iframe src={iframe} frameBorder="0"></iframe>
