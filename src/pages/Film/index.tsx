@@ -19,7 +19,7 @@ const Film = () => {
             console.log(response.data);
             setFilm(response.data);
         })
-    }, []);
+    }, [id]);
 
     return (
         <div>
