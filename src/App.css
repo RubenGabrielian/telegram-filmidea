@@ -5,77 +5,110 @@
 /*  text-align: center;*/
 /*}*/
 .main {
-  width: 100vw;
-  height: 100vh;
-  padding-bottom: 20px;
+    width: 100vw;
+    height: 100vh;
+    padding-bottom: 20px;
 }
+
 header {
-  padding: 20px;
-  margin: 0 auto;
-  text-align: center;
-}
-h1 {
-  margin: 0;
-}
-.welcome {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  min-height: 80vh;
-  margin: 0 auto;
-  button {
-    width: 200px;
+    padding: 20px;
     margin: 0 auto;
-  }
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+.welcome {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    min-height: 80vh;
+    margin: 0 auto;
+
+    button {
+        width: 200px;
+        margin: 0 auto;
+    }
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
 }
 
 
 .loading {
-  position: static;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.iframe-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(15, 16, 23);
+    width: 100%;
+    height: 100vh;
+    z-index: 99;
+
+    iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100vh;
+    }
+    .close {
+        position: absolute;
+        top: 5%;
+        right: 5%;
+        z-index: 999;
+        cursor: pointer;
+    }
 }

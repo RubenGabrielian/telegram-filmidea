@@ -6,10 +6,45 @@ import Emoji1 from "../../assets/emoji1.svg";
 import Emoji2 from "../../assets/emoji2.svg";
 import Emoji3 from "../../assets/emoji3.svg";
 import Emoji4 from "../../assets/emoji4.svg";
+import axiosInstance from "../../api/axiosInstance.ts";
+import {useState} from "react";
+import CloseIcon from "../svgs/CloseIcon.tsx";
+import {Simulate} from "react-dom/test-utils";
+import load = Simulate.load;
+import Loading from "../Loading";
 
 export default function FilmView({film}: { film: any }) {
+
+    const [iframe, setIframe] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+
+    const handlePlay = () => {
+        setLoading(true);
+        axiosInstance.get(`/films/${film.id}/iframe`).then((r)=>{
+            console.log(r.data.data.url)
+            setIframe(r.data.data.url);
+        }).finally(() => {
+            setLoading(false);
+        })
+    }
+
+
     return (
         <div className={'film container px-6 pb-[120px]'}>
+            {
+                iframe ? (
+                    <div className={'iframe-modal'}>
+                        <div className="close" onClick={()=>setIframe('')}>
+                            <CloseIcon />
+                        </div>
+                        <iframe src={iframe} frameBorder="0"></iframe>
+                    </div>
+                ) : null
+            }
+            {
+                loading && <Loading />
+            }
             <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
            <div className="genres flex gap-3 mb-3 flex-wrap">
                {
@@ -22,18 +57,18 @@ export default function FilmView({film}: { film: any }) {
            </div>
             <div className="poster">
                 <img src={film?.poster?.kp_preview_url} width={'100%'} alt=""/>
-                <a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>
-                    <div className="play">
+                {/*<a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>*/}
+                    <div className="play" onClick={handlePlay}>
                         <PlayIcon/>
                     </div>
-                </a>
+                {/*</a>*/}
             </div>
             <div className="actions">
                 <div className="like action-btn">
                     <LikeIcon/>
                 </div>
-                <div className="share action-btn">'
-                    <a href={`https://t.me/share/url?url={https://stackoverflow.com/questions/78159682/how-to-implement-click-to-share-in-telegram-mini-app/78495747#78495747}&text={ruben}`}>
+                <div className="share action-btn">
+                    <a className={'decoration-0'} href={`https://t.me/share/url?url={https://stackoverflow.com/questions/78159682/how-to-implement-click-to-share-in-telegram-mini-app/78495747#78495747}&text={ruben}`}>
                         <ShareIcon />
                     </a>
                 </div>

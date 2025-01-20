@@ -1,5 +1,5 @@
 import './footer.css'
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import LogoIcon from "../svgs/LogoIcon.tsx";
 import HomeIcon from "../svgs/HomeIcon.tsx";
 import SearchIcon from "../svgs/SearchIcon.tsx";
@@ -8,7 +8,7 @@ import {RotatingLines} from "react-loader-spinner";
 
 export default function Footer () {
     const { handleGiveIdea, loading } = useGiveIdea();
-
+    const params = useParams()
 
     const giveMeIdeaHandler = () => {
         handleGiveIdea();
@@ -32,7 +32,7 @@ export default function Footer () {
                     <ul>
                         <li>
                             <Link to={'/'}>
-                                <HomeIcon/>
+                                <HomeIcon active={!params?.id}/>
                             </Link>
                         </li>
                         <li>
