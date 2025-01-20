@@ -9,8 +9,6 @@ import Emoji4 from "../../assets/emoji4.svg";
 import axiosInstance from "../../api/axiosInstance.ts";
 import {useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
-import {Simulate} from "react-dom/test-utils";
-import load = Simulate.load;
 import Loading from "../Loading";
 
 export default function FilmView({film}: { film: any }) {
