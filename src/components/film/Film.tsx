@@ -27,6 +27,11 @@ export default function FilmView({film}: { film: any }) {
         })
     }
 
+    const handleLike = () => {
+        axiosInstance.post(`/films/${film.id}/like`).then((res) => {
+            console.log(res)
+        })
+    }
 
     return (
         <div className={'film container px-6 pb-[120px]'}>
@@ -62,7 +67,7 @@ export default function FilmView({film}: { film: any }) {
                 {/*</a>*/}
             </div>
             <div className="actions">
-                <div className="like action-btn">
+                <div className="like action-btn" onClick={handleLike}>
                     <LikeIcon/>
                 </div>
                 <div className="share action-btn">

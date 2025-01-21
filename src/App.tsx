@@ -25,7 +25,6 @@ function App() {
             username: user?.username,
             hash
         }).then((res) => {
-            console.log(res)
             localStorage.setItem('authToken', res.data?.data?.token);
 
         })
