@@ -15,6 +15,7 @@ function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
 
     useEffect(() => {
+        console.log(WebApp.initDataUnsafe)
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
         const connectedString = user?.id + user?.first_name + user?.last_name + SECRET;
         const hash = sha512(connectedString);
