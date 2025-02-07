@@ -28,7 +28,7 @@ export default function FilmView({film}: { film: any }) {
     }
 
     const handleLike = () => {
-        axiosInstance.post(`/films/${film.id}/like`).then((res) => {
+        axiosInstance.post(`/telegram/films/${film.id}/like`).then((res) => {
             console.log(res)
         })
     }
