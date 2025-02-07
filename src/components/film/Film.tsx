@@ -10,6 +10,7 @@ import axiosInstance from "../../api/axiosInstance.ts";
 import {useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
 import Loading from "../Loading";
+import axios from "axios";
 
 export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
 
@@ -40,6 +41,14 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
                 setFilm(updatedFilm);
             }
         });
+    }
+
+    const handleRate = (type: string) => {
+        axiosInstance.post('/telegram/films/rate', {
+            type
+        }).then((res) => {
+            console.log(res)
+        })
     }
 
     return (
@@ -82,23 +91,23 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
                 <div className="share action-btn">
                     <a
                         className="decoration-0"
-                        href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Mini App!')}`}
+                        href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Film!')}`}
                     >
                         <ShareIcon/>
                     </a>
                 </div>
             </div>
             <div className="emojies flex items-center justify-between">
-                <div className={'emoji'}>
+                <div className={'emoji'} onClick={() => handleRate('bad')}>
                     <img src={Emoji1} alt=""/>
                 </div>
-                <div className={'emoji'}>
+                <div className={'emoji'} onClick={() => handleRate('normal')}>
                     <img src={Emoji2} alt=""/>
                 </div>
-                <div className={'emoji'}>
+                <div className={'emoji'} onClick={() => handleRate('good')}>
                     <img src={Emoji3} alt=""/>
                 </div>
-                <div className={'emoji'}>
+                <div className={'emoji'} onClick={() => handleRate('excellent')}>
                     <img src={Emoji4} alt=""/>
                 </div>
             </div>
