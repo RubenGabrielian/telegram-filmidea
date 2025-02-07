@@ -78,8 +78,11 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
                     <LikeIcon active={!!film?.user_is_liked}/>
                 </div>
                 <div className="share action-btn">
-                    <a className={'decoration-0'} href={`https://t.me/share/url?url={https://stackoverflow.com/questions/78159682/how-to-implement-click-to-share-in-telegram-mini-app/78495747#78495747}&text={ruben}`}>
-                        <ShareIcon />
+                    <a
+                        className="decoration-0"
+                        href={`https://t.me/share/url?url=${encodeURIComponent('https://telegram-filmidea.vercel.app')}&text=${encodeURIComponent('Check out this Mini App!')}`}
+                    >
+                        <ShareIcon/>
                     </a>
                 </div>
             </div>
