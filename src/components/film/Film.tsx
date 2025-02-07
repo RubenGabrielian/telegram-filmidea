@@ -10,7 +10,6 @@ import axiosInstance from "../../api/axiosInstance.ts";
 import {useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
 import Loading from "../Loading";
-import axios from "axios";
 
 export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
 
