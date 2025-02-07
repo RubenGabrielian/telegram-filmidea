@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from "../api/axiosInstance.ts";
 
 const useGiveIdea = () => {
     const [loading, setLoading] = useState(false);
@@ -9,9 +10,9 @@ const useGiveIdea = () => {
 
     const handleGiveIdea = () => {
         setLoading(true);
-        fetch('https://devback.filmidea.tv/api/v1/films/give-me-idea', {
+        axiosInstance.get('https://devback.filmidea.tv/api/v1/films/give-me-idea', {
             headers: {
-                "X-localization": "ru"
+                "X-localization": "ru",
             }
         })
             .then((res) => res.json())
