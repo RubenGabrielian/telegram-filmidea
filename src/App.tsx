@@ -10,12 +10,16 @@ import AxiosInstance from "./api/axiosInstance.ts";
 import WebApp from "@twa-dev/sdk";
 import {SECRET} from "./consts.ts";
 import {sha512} from "js-sha512";
+import {useNavigate} from "react-router-dom";
 
 function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(WebApp.initDataUnsafe)
+        if(WebApp.initDataUnsafe?.start_param) {
+            navigate(`/film/${WebApp.initDataUnsafe?.start_param}`);
+        }
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
         const connectedString = user?.id + user?.first_name + user?.last_name + SECRET;
         const hash = sha512(connectedString);

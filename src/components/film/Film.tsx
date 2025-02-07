@@ -16,7 +16,7 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const miniAppURL = `https://t.me/filmidea_bot?startapp=YOUR_PARAMS`
+    const miniAppURL = `https://t.me/filmidea_bot?startapp=${film?.id}`
 
 
     const handlePlay = () => {
