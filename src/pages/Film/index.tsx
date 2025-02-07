@@ -25,7 +25,7 @@ const Film = () => {
         <div>
             <Layout>
                 {
-                    film ? <FilmView film={film}/> : null
+                    film ? <FilmView film={film} setFilm={setFilm} /> : null
                 }
             </Layout>
         </div>

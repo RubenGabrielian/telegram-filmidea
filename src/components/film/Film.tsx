@@ -11,7 +11,7 @@ import {useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
 import Loading from "../Loading";
 
-export default function FilmView({film}: { film: any }) {
+export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
 
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -29,8 +29,15 @@ export default function FilmView({film}: { film: any }) {
 
     const handleLike = () => {
         axiosInstance.post(`/telegram/films/${film.id}/like`).then((res) => {
-            console.log(res)
-        })
+            if(res.data.success) {
+                const updatedFilm = {
+                    ...film,
+                    user_is_liked: !film?.user_is_liked
+                };
+
+                setFilm(updatedFilm);
+            }
+        });
     }
 
     return (
@@ -68,7 +75,7 @@ export default function FilmView({film}: { film: any }) {
             </div>
             <div className="actions">
                 <div className="like action-btn" onClick={handleLike}>
-                    <LikeIcon/>
+                    <LikeIcon active={!!film?.user_is_liked}/>
                 </div>
                 <div className="share action-btn">
                     <a className={'decoration-0'} href={`https://t.me/share/url?url={https://stackoverflow.com/questions/78159682/how-to-implement-click-to-share-in-telegram-mini-app/78495747#78495747}&text={ruben}`}>
