@@ -15,10 +15,9 @@ const useGiveIdea = () => {
                 "X-localization": "ru",
             }
         })
-            .then((res) => res.json())
             .then((response) => {
-                setFilm(response.data);
-                navigate(`/film/${response.data.id}`);
+                setFilm(response.data.data);
+                navigate(`/film/${response.data.data.id}`);
             })
             .finally(() => {
                 setLoading(false);  // Set loading to false after completion
