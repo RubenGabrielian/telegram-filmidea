@@ -43,9 +43,7 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
     }
 
     const handleRate = (type: string) => {
-        axiosInstance.post('/telegram/films/rate', {
-            type
-        }).then((res) => {
+        axiosInstance.get(`/telegram/films/rate?type=${type}`).then((res) => {
             console.log(res)
         })
     }
