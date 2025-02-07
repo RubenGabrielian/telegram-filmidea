@@ -16,6 +16,8 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    const miniAppURL = `https://t.me/filmidea_bot?startapp=YOUR_PARAMS`
+
 
     const handlePlay = () => {
         setLoading(true);
@@ -80,7 +82,7 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
                 <div className="share action-btn">
                     <a
                         className="decoration-0"
-                        href={`https://t.me/share/url?url=${encodeURIComponent('https://telegram-filmidea.vercel.app')}&text=${encodeURIComponent('Check out this Mini App!')}`}
+                        href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Mini App!')}`}
                     >
                         <ShareIcon/>
                     </a>
