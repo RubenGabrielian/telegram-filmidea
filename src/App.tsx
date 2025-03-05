@@ -35,6 +35,14 @@ function App() {
         })
     }, []);
 
+    const handlePay = () => {
+        let walletAddress = "UQA-WCSpAmml__4sTuCvy9UScI7-GbVQGBQ1hIzMIfJGkkDh";  // Your TON Wallet address
+        let amount = "1000000000"; // 1 TON in nanoTON
+        let url = `https://t.me/wallet?start=send-ton_${walletAddress}_${amount}`;
+
+        window.location.href = url; // Redirect to Telegram Wallet
+    }
+
     return (
         <div className={'main'} style={{backgroundColor: `black`}}>
             <Header/>
@@ -61,6 +69,7 @@ function App() {
                                 <h1 className={'font-bold mb-2'}>посмотреть? </h1>
                             </div>
                             <Button text={'Дайте мне идею'} onclick={handleGiveIdea}/>
+                            <button onClick={handlePay}>PAY</button>
                         </div>
                     </>
                 )
