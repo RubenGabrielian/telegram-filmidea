@@ -1,8 +1,21 @@
 import bg from "../../assets/gradient.png";
 import logo from "../../assets/logo.svg"
 import CloseIcon from "../svgs/CloseIcon.tsx";
+import {useEffect, useState} from "react";
+import axiosInstance from "../../api/axiosInstance.ts";
+import Loading from "../Loading";
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+      if(isOpen)  {
+          axiosInstance.get('/genres/search').then((r) => {
+              setCategories(r.data.data);
+          })
+      }
+    }, [isOpen]);
 
     return (
         <div>
@@ -25,6 +38,18 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                         <div className="absolute top-3 right-3" onClick={() => setOpen(false)}>
                             <CloseIcon/>
                         </div>
+                       <div className={'flex flex-wrap justify-center container mx-auto px-5 mt-10 overflow-auto max-h-[80vh]'}>
+                           {
+                               categories.length ? (
+                                   categories.map((item) => (
+                                       <div key={item?.id} className="relative mb-5">
+                                           <img className="w-full" src={item?.background} alt=""/>
+                                           <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
+                                       </div>
+                                   ))
+                               ) : <Loading />
+                           }
+                       </div>
                     </div>
                 ) : null
             }
