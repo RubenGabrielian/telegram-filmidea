@@ -4,8 +4,8 @@ import CloseIcon from "../svgs/CloseIcon.tsx";
 import {useEffect, useState} from "react";
 import axiosInstance from "../../api/axiosInstance.ts";
 import Loading from "../Loading";
-import UseGiveIdea from "../../hooks/useGiveIdea.tsx";
 import useGiveIdea from "../../hooks/useGiveIdea.tsx";
+import GiveMeIdeaIcon from "../svgs/GiveMeIdeaIcon.tsx";
 
 interface Category {
     id: number,
@@ -16,8 +16,7 @@ interface Category {
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
 
     const [categories, setCategories] = useState([]);
-    const { handleGiveIdea, loading } = useGiveIdea();
-
+    const {handleGiveIdea, loading} = useGiveIdea();
 
 
     useEffect(() => {
@@ -28,12 +27,12 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
         }
     }, [isOpen]);
 
-    const handleGiveMeIdeaByGenre = (id) => {
+    const handleGiveMeIdeaByGenre = (id?:number) => {
         handleGiveIdea(id);
     }
 
     useEffect(() => {
-        if(loading) {
+        if (loading) {
             setOpen(false)
         }
     }, [loading]);
@@ -47,7 +46,6 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                         <img src={logo} className="mt-5 relative left-[50%] translate-x-[-50%] mb-4" alt=""/>
                         <div className="relative w-[80%] max-w-sm top-3 left-[50%] translate-x-[-50%]">
                             <input type="text" placeholder="Search..."
-                                   autoFocus={true}
                                    className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-xl bg-transparent text-sm focus:ring-0 focus:border-[#febb12] focus:outline-none"/>
                             <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -60,11 +58,15 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                             <CloseIcon/>
                         </div>
                         <div
-                            className={'flex flex-wrap justify-center container mx-auto px-5 mt-10 overflow-auto max-h-[80vh]'}>
+                            className={'flex flex-wrap justify-center container mx-auto px-10 mt-10 overflow-auto max-h-[80vh]'}>
+                            <div className="relative mb-5 h-[200px] w-full flex items-center justify-center rounded-2xl" style={{background: 'linear-gradient(180.01deg, rgba(19, 2, 151, 0.54) 12.32%, rgba(15, 3, 156, 0.54) 60.48%, rgba(59, 65, 221, 0) 106.27%)'}} onClick={() => handleGiveMeIdeaByGenre()}>
+                                <GiveMeIdeaIcon/>
+                            </div>
                             {
                                 categories.length ? (
                                     categories.map((item: Category) => (
-                                        <div key={item?.id} className="relative mb-5" onClick={() =>handleGiveMeIdeaByGenre (item.id)}>
+                                        <div key={item?.id} className="relative mb-5 w-full"
+                                             onClick={() => handleGiveMeIdeaByGenre(item.id)}>
                                             <img className="w-full" src={item?.background} alt=""/>
                                             <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
                                         </div>
@@ -77,7 +79,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
             }
             {
                 loading ? <div className={'absolute top-0 bg-black w-full flex items-center justify-center'}>
-                    <Loading />
+                    <Loading/>
                 </div> : null
             }
         </div>

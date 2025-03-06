@@ -7,9 +7,9 @@ const useGiveIdea = () => {
     const [film, setFilm] = useState(null);
     const navigate = useNavigate();
 
-    const handleGiveIdea = (id: number) => {
+    const handleGiveIdea = (id: number | undefined) => {
         setLoading(true);
-        axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?genre_id=${id}`, {
+        axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
             headers: {
                 "X-localization": "ru",
             }
