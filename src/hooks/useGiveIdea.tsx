@@ -7,7 +7,7 @@ const useGiveIdea = () => {
     const [film, setFilm] = useState(null);
     const navigate = useNavigate();
 
-    const handleGiveIdea = (id: number | undefined) => {
+    const handleGiveIdea = (id?: number) => {
         setLoading(true);
         axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
             headers: {
