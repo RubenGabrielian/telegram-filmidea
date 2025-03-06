@@ -1,6 +1,5 @@
-
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import axiosInstance from "../api/axiosInstance.ts";
 
 const useGiveIdea = () => {
@@ -8,9 +7,9 @@ const useGiveIdea = () => {
     const [film, setFilm] = useState(null);
     const navigate = useNavigate();
 
-    const handleGiveIdea = () => {
+    const handleGiveIdea = (id: number) => {
         setLoading(true);
-        axiosInstance.get('https://devback.filmidea.tv/api/v1/films/give-me-idea', {
+        axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?genre_id=${id}`, {
             headers: {
                 "X-localization": "ru",
             }
@@ -24,7 +23,7 @@ const useGiveIdea = () => {
             });
     };
 
-    return { handleGiveIdea, loading, film };
+    return {handleGiveIdea, loading, film};
 };
 
 export default useGiveIdea;

@@ -4,6 +4,8 @@ import CloseIcon from "../svgs/CloseIcon.tsx";
 import {useEffect, useState} from "react";
 import axiosInstance from "../../api/axiosInstance.ts";
 import Loading from "../Loading";
+import UseGiveIdea from "../../hooks/useGiveIdea.tsx";
+import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 
 interface Category {
     id: number,
@@ -14,6 +16,9 @@ interface Category {
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
 
     const [categories, setCategories] = useState([]);
+    const { handleGiveIdea, loading } = useGiveIdea();
+
+
 
     useEffect(() => {
         if (isOpen) {
@@ -22,6 +27,16 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
             })
         }
     }, [isOpen]);
+
+    const handleGiveMeIdeaByGenre = (id) => {
+        handleGiveIdea(id);
+    }
+
+    useEffect(() => {
+        if(loading) {
+            setOpen(false)
+        }
+    }, [loading]);
 
     return (
         <div>
@@ -49,7 +64,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                             {
                                 categories.length ? (
                                     categories.map((item: Category) => (
-                                        <div key={item?.id} className="relative mb-5">
+                                        <div key={item?.id} className="relative mb-5" onClick={() =>handleGiveMeIdeaByGenre (item.id)}>
                                             <img className="w-full" src={item?.background} alt=""/>
                                             <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
                                         </div>
@@ -59,6 +74,11 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                         </div>
                     </div>
                 ) : null
+            }
+            {
+                loading ? <div className={'absolute top-0 bg-black w-full flex items-center justify-center'}>
+                    <Loading />
+                </div> : null
             }
         </div>
     )
