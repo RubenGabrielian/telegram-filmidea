@@ -6,7 +6,6 @@ import SearchIcon from "../svgs/SearchIcon.tsx";
 import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import {RotatingLines} from "react-loader-spinner";
 import {useState} from "react";
-import SearchMOdal from "../modals/SearchModal.tsx";
 import SearchModal from "../modals/SearchModal.tsx";
 
 export default function Footer() {
