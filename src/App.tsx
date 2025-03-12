@@ -44,7 +44,8 @@ function App() {
                     console.log("User watched the ad till the end");
                     // Reward the user here
                 })
-                .catch((e) => {
+                // @ts-ignore
+                .catch((e:any) => {
                     console.error("Error showing ad:", e);
                     // Handle ad error
                 });
