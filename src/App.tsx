@@ -35,12 +35,28 @@ function App() {
         })
     }, []);
 
+    const handleShowAd = () => {
+        if (typeof show_9073777 === "function") {
+            show_9073777("pop")
+                .then(() => {
+                    console.log("User watched the ad till the end");
+                    // Reward the user here
+                })
+                .catch((e) => {
+                    console.error("Error showing ad:", e);
+                    // Handle ad error
+                });
+        } else {
+            console.error("Ad function not found");
+        }
+    }
+
 
 
     return (
         <div className={'main'} style={{backgroundColor: `black`}}>
             <Header/>
-
+            <button onClick={handleShowAd}>Watch Ad</button>
             {
                 loading ? (
                     <div className="loading">
