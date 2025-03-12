@@ -36,7 +36,9 @@ function App() {
     }, []);
 
     const handleShowAd = () => {
+        // @ts-ignore
         if (typeof show_9073777 === "function") {
+            // @ts-ignore
             show_9073777("pop")
                 .then(() => {
                     console.log("User watched the ad till the end");
