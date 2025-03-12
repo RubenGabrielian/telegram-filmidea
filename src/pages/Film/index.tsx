@@ -6,8 +6,11 @@ import axiosInstance from "../../api/axiosInstance.ts";
 
 const Film = () => {
 
+
+
     const {id} = useParams();
     const [film, setFilm] = useState<any>();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axiosInstance(`https://devback.filmidea.tv/api/v1/films/${id}`, {
@@ -15,16 +18,19 @@ const Film = () => {
                 "X-localization": "ru"
             }
         }).then((response) => {
-            console.log(response.data.data);
+            if (response) {
+                setIsLoading(false);
+            }
             setFilm(response.data.data);
         })
     }, [id]);
+
 
     return (
         <div>
             <Layout>
                 {
-                    film ? <FilmView film={film} setFilm={setFilm} /> : null
+                    <FilmView film={film} setFilm={setFilm} isLoading={isLoading}/>
                 }
             </Layout>
         </div>

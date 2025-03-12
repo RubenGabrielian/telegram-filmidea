@@ -40,6 +40,7 @@ function App() {
     return (
         <div className={'main'} style={{backgroundColor: `black`}}>
             <Header/>
+
             {
                 loading ? (
                     <div className="loading">

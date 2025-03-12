@@ -7,9 +7,25 @@
     <title>Vite + React + TS</title>
     <script type="module" crossorigin src="/vite-boilerplate/assets/index-207e6d7b.js"></script>
     <link rel="stylesheet" href="/vite-boilerplate/assets/index-f1791ef5.css">
+    <script src='//whephiwums.com/sdk.js' data-zone='9073777' data-sdk='show_9073777'></script>
   </head>
   <body>
     <div id="root"></div>
-    
+    <script>
+
+      // Rewarded Popup
+
+      show_9073777('pop').then(() => {
+        alert()
+        // user watch ad till the end or close it in interstitial format
+        // your code to reward user for rewarded format
+      }).catch(e => {
+        alert('error')
+        // user get error during playing ad
+        // do nothing or whatever you want
+      })
+
+
+    </script>
   </body>
 </html>

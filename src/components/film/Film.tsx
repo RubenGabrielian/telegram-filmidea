@@ -7,17 +7,23 @@ import Emoji2 from "../../assets/emoji2.svg";
 import Emoji3 from "../../assets/emoji3.svg";
 import Emoji4 from "../../assets/emoji4.svg";
 import axiosInstance from "../../api/axiosInstance.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
 import Loading from "../Loading";
 
-export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
-
+export default function FilmView({film, setFilm, isLoading}: { film: any, setFilm: any, isLoading: boolean }) {
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
 
     const miniAppURL = `https://t.me/filmidea_bot?startapp=${film?.id}`
 
+    useEffect(() => {
+        if(!film) {
+            setLoading(true);
+        } else {
+            setLoading(false);
+        }
+    }, [film]);
 
     const handlePlay = () => {
         setLoading(true);
@@ -52,6 +58,9 @@ export default function FilmView({film, setFilm}: { film: any, setFilm: any }) {
 
     return (
         <div className={'film container px-6 pb-[120px]'}>
+            {
+                isLoading ? <Loading /> : null
+            }
             {
                 iframe ? (
                     <div className={'iframe-modal'}>
