@@ -22,6 +22,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             setLoading(true);
         } else {
             setLoading(false);
+            console.log(film);
         }
     }, [film]);
 
@@ -63,7 +64,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     }
 
     const getEmojiClass = (type: string) => {
-        return `emoji ${film?.user_rating === type ? 'active' : ''}`;
+        return `emoji ${film?.rating === type ? 'active' : ''}`;
     }
 
     return (
