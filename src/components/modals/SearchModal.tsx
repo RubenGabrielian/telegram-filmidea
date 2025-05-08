@@ -64,7 +64,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                          className={'w-full h-lvh fixed top-0'}>
                         <img src={logo} className="mt-5 relative left-[50%] translate-x-[-50%] mb-4" alt=""/>
                         <div className="relative w-[80%] max-w-sm top-3 left-[50%] translate-x-[-50%]">
-                            <input type="text" placeholder="Search..."
+                            <input type="text" placeholder="Поиск..."
                                    className="w-full pl-10 pr-3 py-2
                                    border border-gray-300 rounded-xl bg-transparent text-sm
                                    focus:ring-0 focus:border-[#febb12] focus:outline-none"

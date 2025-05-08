@@ -52,8 +52,18 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
         axiosInstance.post(`/telegram/films/${film.id}/rate`, {
             type
         }).then((res) => {
-            console.log(res)
+            if(res.data.success) {
+                const updatedFilm = {
+                    ...film,
+                    user_rating: type
+                };
+                setFilm(updatedFilm);
+            }
         })
+    }
+
+    const getEmojiClass = (type: string) => {
+        return `emoji ${film?.user_rating === type ? 'active' : ''}`;
     }
 
     return (
@@ -106,16 +116,16 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                 </div>
             </div>
             <div className="emojies flex items-center justify-between">
-                <div className={'emoji'} onClick={() => handleRate('bad')}>
+                <div className={getEmojiClass('bad')} onClick={() => handleRate('bad')}>
                     <img src={Emoji1} alt=""/>
                 </div>
-                <div className={'emoji'} onClick={() => handleRate('normal')}>
+                <div className={getEmojiClass('normal')} onClick={() => handleRate('normal')}>
                     <img src={Emoji2} alt=""/>
                 </div>
-                <div className={'emoji'} onClick={() => handleRate('good')}>
+                <div className={getEmojiClass('good')} onClick={() => handleRate('good')}>
                     <img src={Emoji3} alt=""/>
                 </div>
-                <div className={'emoji'} onClick={() => handleRate('excellent')}>
+                <div className={getEmojiClass('excellent')} onClick={() => handleRate('excellent')}>
                     <img src={Emoji4} alt=""/>
                 </div>
             </div>

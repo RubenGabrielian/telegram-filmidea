@@ -47,12 +47,16 @@ function App() {
             localStorage.setItem('authToken', res.data?.data?.token);
         });
 
+        // Set up Telegram WebApp
+        WebApp.ready();
+        WebApp.expand();
+        WebApp.enableClosingConfirmation();
+
         // Cleanup
         return () => {
             WebApp.offEvent('themeChanged', setTheme);
         };
     }, []);
-
 
     return (
         <div className={'main'}>
