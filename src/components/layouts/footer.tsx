@@ -4,7 +4,6 @@ import LogoIcon from "../svgs/LogoIcon.tsx";
 import HomeIcon from "../svgs/HomeIcon.tsx";
 import SearchIcon from "../svgs/SearchIcon.tsx";
 import useGiveIdea from "../../hooks/useGiveIdea.tsx";
-import {RotatingLines} from "react-loader-spinner";
 import {useState} from "react";
 import SearchModal from "../modals/SearchModal.tsx";
 import Loading from '../Loading/index.tsx';

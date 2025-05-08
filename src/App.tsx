@@ -1,7 +1,6 @@
 import './App.css'
 import './styles/theme.css'
 import Button from "./components/Button"
-import {RotatingLines} from "react-loader-spinner";
 import Header from "./components/layouts/header.tsx";
 import Footer from "./components/layouts/footer.tsx";
 import useGiveIdea from "./hooks/useGiveIdea.tsx";
