@@ -97,7 +97,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                        <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
                    ))
                }
-               <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} min</div>
+               <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} мин.</div>
            </div>
             <div className="poster">
                 <img src={film?.poster?.kp_preview_url} width={'100%'} alt=""/>
@@ -145,7 +145,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             </div>
             <div className="description bg-[#0F1017] p-4 rounded-md">
                 <p className={'mb-3'}>
-                    <b>Description</b>
+                    <b>Описания</b>
                 </p>
                 <p className={'text-[#8E9BA7]'}>{film?.description}</p>
             </div>

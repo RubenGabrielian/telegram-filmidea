@@ -61,6 +61,9 @@ function App() {
         };
     }, [location.pathname]);
 
+    const handleClick = () => {
+        handleGiveIdea()
+    }
     return (
         <div className={'main'}>
             <Header/>
@@ -77,7 +80,7 @@ function App() {
                                 </div>
                                 <h1 className={'font-bold mb-2'}>посмотреть? </h1>
                             </div>
-                            <Button text={'Дайте мне идею'} onclick={handleGiveIdea}/>
+                            <Button text={'Дайте мне идею'} onclick={handleClick}/>
                         </div>
                     </>
                 )
