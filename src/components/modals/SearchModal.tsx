@@ -98,8 +98,11 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                     <div>
                                         {
                                             searchResult?.map((movie: Movie) => (
-                                                    <img src={movie?.poster} alt=""
-                                                         className='w-full h-[170px] rounded-2xl object-cover'/>
+                                                   <div className="search-result-item">
+                                                        <a href={`/film/${movie?.id}`}>
+                                                            <img src={movie?.poster} alt="" className='w-full h-[170px] rounded-2xl object-cover'/>
+                                                        </a>
+                                                   </div>
 
                                             ))
                                         }
@@ -119,7 +122,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                 ) : null
             }
             {
-                loading ? <div className={'absolute top-0 bg-black w-full flex items-center justify-center'}>
+                loading ? <div className={'loading'}>
                     <Loading/>
                 </div> : null
             }
