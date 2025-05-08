@@ -52,7 +52,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     const handleRate = (type: string) => {
         const updatedFilm = {
             ...film,
-            user_rating: type
+            rating: type
         };
         setFilm(updatedFilm);
 
