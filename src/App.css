@@ -8,16 +8,20 @@
     width: 100vw;
     height: 100vh;
     padding-bottom: 20px;
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
 }
 
 header {
     padding: 20px;
     margin: 0 auto;
     text-align: center;
+    background-color: var(--tg-theme-bg-color);
 }
 
 h1 {
     margin: 0;
+    color: var(--tg-theme-text-color);
 }
 
 .welcome {
@@ -28,10 +32,13 @@ h1 {
     justify-content: center;
     min-height: 80vh;
     margin: 0 auto;
+    background-color: var(--tg-theme-bg-color);
 
     button {
         width: 200px;
         margin: 0 auto;
+        background-color: var(--tg-theme-button-color);
+        color: var(--tg-theme-button-text-color);
     }
 }
 
@@ -54,6 +61,7 @@ h1 {
     from {
         transform: rotate(0deg);
     }
+
     to {
         transform: rotate(360deg);
     }
@@ -80,7 +88,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 100vh;
-    /*background: black;*/
+    background-color: var(--tg-theme-bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -91,7 +99,7 @@ h1 {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgb(15, 16, 23);
+    background-color: var(--tg-theme-bg-color);
     width: 100%;
     height: 100vh;
     z-index: 99;
@@ -104,11 +112,13 @@ h1 {
         width: 100%;
         height: 100vh;
     }
+
     .close {
         position: absolute;
         top: 5%;
         right: 5%;
         z-index: 999;
         cursor: pointer;
+        color: var(--tg-theme-text-color);
     }
 }

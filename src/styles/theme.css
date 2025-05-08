@@ -1,0 +1,48 @@
+:root {
+    /* Light theme (default) */
+    --tg-theme-bg-color: #ffffff;
+    --tg-theme-text-color: #000000;
+    --tg-theme-hint-color: #999999;
+    --tg-theme-link-color: #2481cc;
+    --tg-theme-button-color: #2481cc;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-secondary-bg-color: #f4f4f5;
+}
+
+[data-theme="dark"] {
+    --tg-theme-bg-color: #1f2937;
+    --tg-theme-text-color: #ffffff;
+    --tg-theme-hint-color: #9ca3af;
+    --tg-theme-link-color: #60a5fa;
+    --tg-theme-button-color: #60a5fa;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-secondary-bg-color: #374151;
+}
+
+/* Global styles using theme variables */
+body {
+    background-color: var(--tg-theme-bg-color);
+    color: var(--tg-theme-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--tg-theme-text-color);
+}
+
+a {
+    color: var(--tg-theme-link-color);
+}
+
+button {
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
+}
+
+.secondary-bg {
+    background-color: var(--tg-theme-secondary-bg-color);
+}

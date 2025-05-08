@@ -1,4 +1,5 @@
 import './App.css'
+import './styles/theme.css'
 import Button from "./components/Button"
 import {RotatingLines} from "react-loader-spinner";
 import Header from "./components/layouts/header.tsx";
@@ -17,6 +18,19 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        // Handle theme
+        const setTheme = () => {
+            const theme = WebApp.colorScheme;
+            document.documentElement.setAttribute('data-theme', theme);
+        };
+
+        // Set initial theme
+        setTheme();
+
+        // Listen for theme changes
+        WebApp.onEvent('themeChanged', setTheme);
+
+        // Handle start param and auth
         if(WebApp.initDataUnsafe?.start_param) {
             navigate(`/film/${WebApp.initDataUnsafe?.start_param}`);
         }
@@ -31,8 +45,12 @@ function App() {
             hash
         }).then((res) => {
             localStorage.setItem('authToken', res.data?.data?.token);
+        });
 
-        })
+        // Cleanup
+        return () => {
+            WebApp.offEvent('themeChanged', setTheme);
+        };
     }, []);
 
     const handleShowAd = () => {
@@ -42,22 +60,18 @@ function App() {
             show_9073777("pop")
                 .then(() => {
                     console.log("User watched the ad till the end");
-                    // Reward the user here
                 })
                 // @ts-ignore
                 .catch((e:any) => {
                     console.error("Error showing ad:", e);
-                    // Handle ad error
                 });
         } else {
             console.error("Ad function not found");
         }
     }
 
-
-
     return (
-        <div className={'main'} style={{backgroundColor: `black`}}>
+        <div className={'main'}>
             <Header/>
             <button onClick={handleShowAd}>Watch Ad</button>
             {
@@ -69,7 +83,7 @@ function App() {
                             strokeWidth="2"
                             animationDuration="0.75"
                             ariaLabel="rotating-lines-loading"
-                            strokeColor={'white'}
+                            strokeColor={WebApp.colorScheme === 'dark' ? 'white' : 'black'}
                         />
                     </div>
                 ) : (
@@ -88,7 +102,6 @@ function App() {
                 )
             }
             <Footer/>
-
         </div>
     )
 }
