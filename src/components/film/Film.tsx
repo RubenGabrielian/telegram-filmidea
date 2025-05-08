@@ -50,21 +50,25 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     }
 
     const handleRate = (type: string) => {
+        const updatedFilm = {
+            ...film,
+            user_rating: type
+        };
+        setFilm(updatedFilm);
+
         axiosInstance.post(`/telegram/films/${film.id}/rate`, {
             type
         }).then((res) => {
-            if(res.data.success) {
-                const updatedFilm = {
-                    ...film,
-                    user_rating: type
-                };
-                setFilm(updatedFilm);
+            if(!res.data.success) {
+                setFilm(film);
             }
-        })
+        }).catch(() => {
+            setFilm(film);
+        });
     }
 
     const getEmojiClass = (type: string) => {
-        return `emoji ${film?.rating === type ? 'active' : ''}`;
+        return `emoji ${film?.user_rating === type ? 'active' : ''}`;
     }
 
     return (
