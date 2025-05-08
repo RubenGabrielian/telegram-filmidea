@@ -10,7 +10,6 @@ import Loading from '../Loading/index.tsx';
 
 export default function Footer() {
     const {handleGiveIdea, loading} = useGiveIdea();
-    const params = useParams();
     const location = useLocation();
     const navigate = useNavigate();
     const [openSearchModal, setOpenSearchModal] = useState(false);
