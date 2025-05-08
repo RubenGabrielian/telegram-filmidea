@@ -7,13 +7,14 @@
     --tg-theme-button-color: #60a5fa;
     --tg-theme-button-text-color: #ffffff;
     --tg-theme-secondary-bg-color: #1a1a1a;
+    background-color: #000000;
 }
 
 [data-theme="dark"] {
     --tg-theme-bg-color: #000000;
     --tg-theme-text-color: #ffffff;
     --tg-theme-hint-color: #9ca3af;
-    --tg-theme-link-color: #60a5fa;
+    --tg-theme-link-color: #425162;
     --tg-theme-button-color: #60a5fa;
     --tg-theme-button-text-color: #ffffff;
     --tg-theme-secondary-bg-color: #1a1a1a;
@@ -25,18 +26,7 @@ body {
     color: var(--tg-theme-text-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--tg-theme-text-color);
-}
 
-a {
-    color: var(--tg-theme-link-color);
-}
 
 button {
     background-color: var(--tg-theme-button-color);
