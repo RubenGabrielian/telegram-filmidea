@@ -12,6 +12,7 @@ import WebApp from "@twa-dev/sdk";
 import {SECRET} from "./consts.ts";
 import {sha512} from "js-sha512";
 import {useNavigate} from "react-router-dom";
+import Loading from './components/Loading/index.tsx';
 
 function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
@@ -53,39 +54,13 @@ function App() {
         };
     }, []);
 
-    const handleShowAd = () => {
-        // @ts-ignore
-        if (typeof show_9073777 === "function") {
-            // @ts-ignore
-            show_9073777("pop")
-                .then(() => {
-                    console.log("User watched the ad till the end");
-                })
-                // @ts-ignore
-                .catch((e:any) => {
-                    console.error("Error showing ad:", e);
-                });
-        } else {
-            console.error("Ad function not found");
-        }
-    }
 
     return (
         <div className={'main'}>
             <Header/>
-            <button onClick={handleShowAd}>Watch Ad</button>
             {
                 loading ? (
-                    <div className="loading">
-                        <RotatingLines
-                            visible={true}
-                            width="96"
-                            strokeWidth="2"
-                            animationDuration="0.75"
-                            ariaLabel="rotating-lines-loading"
-                            strokeColor={WebApp.colorScheme === 'dark' ? 'white' : 'black'}
-                        />
-                    </div>
+                    <Loading />
                 ) : (
                     <>
                         <div className={'welcome'}>

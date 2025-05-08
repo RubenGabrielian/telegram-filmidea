@@ -1,22 +1,22 @@
 :root {
     /* Light theme (default) */
-    --tg-theme-bg-color: #ffffff;
-    --tg-theme-text-color: #000000;
-    --tg-theme-hint-color: #999999;
-    --tg-theme-link-color: #2481cc;
-    --tg-theme-button-color: #2481cc;
-    --tg-theme-button-text-color: #ffffff;
-    --tg-theme-secondary-bg-color: #f4f4f5;
-}
-
-[data-theme="dark"] {
-    --tg-theme-bg-color: #1f2937;
+    --tg-theme-bg-color: #000000;
     --tg-theme-text-color: #ffffff;
     --tg-theme-hint-color: #9ca3af;
     --tg-theme-link-color: #60a5fa;
     --tg-theme-button-color: #60a5fa;
     --tg-theme-button-text-color: #ffffff;
-    --tg-theme-secondary-bg-color: #374151;
+    --tg-theme-secondary-bg-color: #1a1a1a;
+}
+
+[data-theme="dark"] {
+    --tg-theme-bg-color: #000000;
+    --tg-theme-text-color: #ffffff;
+    --tg-theme-hint-color: #9ca3af;
+    --tg-theme-link-color: #60a5fa;
+    --tg-theme-button-color: #60a5fa;
+    --tg-theme-button-text-color: #ffffff;
+    --tg-theme-secondary-bg-color: #1a1a1a;
 }
 
 /* Global styles using theme variables */

@@ -7,6 +7,7 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import {RotatingLines} from "react-loader-spinner";
 import {useState} from "react";
 import SearchModal from "../modals/SearchModal.tsx";
+import Loading from '../Loading/index.tsx';
 
 export default function Footer() {
     const {handleGiveIdea, loading} = useGiveIdea();
@@ -23,21 +24,10 @@ export default function Footer() {
 
     return (
         <>
+            {loading && <div className={'loading'}><Loading /></div>}
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
-                {
-                    loading ? (
-                        <div className="loading">
-                            <RotatingLines
-                                visible={true}
-                                width="96"
-                                strokeWidth="2"
-                                animationDuration="0.75"
-                                ariaLabel="rotating-lines-loading"
-                                strokeColor={'white'}
-                            />
-                        </div>
-                    ) : (
                         <ul>
+                            
                             <li>
                                 <Link to={'/'}>
                                     <HomeIcon active={!params?.id}/>
@@ -54,8 +44,6 @@ export default function Footer() {
                                 </div>
                             </li>
                         </ul>
-                    )
-                }
             </footer>
             <SearchModal isOpen={openSearchModal} setOpen={setOpenSearchModal} />
         </>

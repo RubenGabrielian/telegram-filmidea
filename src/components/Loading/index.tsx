@@ -1,16 +1,12 @@
-import {RotatingLines} from "react-loader-spinner";
+import './loading.css';
 
-export default function Loading () {
+export default function Loading() {
     return (
-        <div className="loading">
-            <RotatingLines
-                visible={true}
-                width="96"
-                strokeWidth="2"
-                animationDuration="0.75"
-                ariaLabel="rotating-lines-loading"
-                strokeColor={'white'}
-            />
+        <div className="loading-container">
+            <div className="loading-circle">
+                <div className="loading-circle-inner"></div>
+            </div>
+            <div className="loading-text">Loading...</div>
         </div>
-    )
+    );
 }
