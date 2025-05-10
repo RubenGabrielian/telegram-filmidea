@@ -89,7 +89,10 @@ function App() {
                     ? 'https://devback.filmidea.tv/api/v1/telegram/users/favorites'
                     : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
                 const response = await AxiosInstance.get(endpoint);
-                setMovies(response.data?.data || []);
+                setMovies(activeTab === 'liked' 
+                    ? response?.data?.data || []
+                    : response?.data?.data?.data || []
+                );
             } catch (error) {
                 console.error('Error fetching movies:', error);
                 setMovies([]);
