@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './movieTabs.css';
 import HeartIcon from '../svgs/HeartIcon';
 import EyeIcon from '../svgs/EyeIcon';

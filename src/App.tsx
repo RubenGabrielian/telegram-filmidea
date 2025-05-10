@@ -13,7 +13,22 @@ import {sha512} from "js-sha512";
 import {useNavigate, useLocation} from "react-router-dom";
 import Loading from './components/Loading/index.tsx';
 import MovieTabs from './components/tabs/MovieTabs';
-import { Movie, mockMovies } from './mocks/movies';
+
+interface Movie {
+    id: number;
+    name: string;
+    alternative_name?: string;
+    description: string;
+    movie_length: number;
+    poster: {
+        kp_preview_url: string;
+    };
+    genres: Array<{
+        name: string;
+    }>;
+    user_is_liked: boolean;
+    rating?: string;
+}
 
 function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
@@ -22,7 +37,6 @@ function App() {
     const [activeTab, setActiveTab] = useState<'liked' | 'watched'>('liked');
     const [movies, setMovies] = useState<Movie[]>([]);
     const [moviesLoading, setMoviesLoading] = useState(false);
-    const [useMockData, setUseMockData] = useState(false);
 
     useEffect(() => {
         // Handle theme
@@ -54,8 +68,6 @@ function App() {
             hash
         }).then((res) => {
             localStorage.setItem('authToken', res.data?.data?.token);
-        }).catch(() => {
-            setUseMockData(true);
         });
 
         // Set up Telegram WebApp
@@ -73,38 +85,21 @@ function App() {
         const fetchMovies = async () => {
             setMoviesLoading(true);
             try {
-                if (useMockData) {
-                    // Filter mock movies based on the active tab
-                    const filteredMovies = mockMovies.filter(movie => 
-                        activeTab === 'liked' ? movie.user_is_liked : movie.rating
-                    );
-                    setMovies(filteredMovies);
-                } else {
-                    const endpoint = activeTab === 'liked' 
-                        ? 'https://devback.filmidea.tv/api/v1/telegram/users/favorites'
-                        : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
-                    const response = await AxiosInstance.get(endpoint);
-                    if (response.data?.data) {
-                        setMovies(response.data.data);
-                    } else {
-                        setMovies([]);
-                    }
-                }
+                const endpoint = activeTab === 'liked' 
+                    ? 'https://devback.filmidea.tv/api/v1/telegram/users/favorites'
+                    : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
+                const response = await AxiosInstance.get(endpoint);
+                setMovies(response.data?.data || []);
             } catch (error) {
                 console.error('Error fetching movies:', error);
-                setUseMockData(true);
-                // Use mock data as fallback
-                const filteredMovies = mockMovies.filter(movie => 
-                    activeTab === 'liked' ? movie.user_is_liked : movie.rating
-                );
-                setMovies(filteredMovies);
+                setMovies([]);
             } finally {
                 setMoviesLoading(false);
             }
         };
 
         fetchMovies();
-    }, [activeTab, useMockData]);
+    }, [activeTab]);
 
     const handleClick = () => {
         handleGiveIdea()
