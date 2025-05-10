@@ -6,7 +6,7 @@
 /*}*/
 .main {
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
     padding-bottom: 20px;
     background-color: #000000;
     color: var(--tg-theme-text-color);
@@ -24,22 +24,29 @@ h1 {
     color: white;
 }
 
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 140px);
+}
+
 .welcome {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-content: center;
-    justify-content: center;
-    min-height: 80vh;
+    justify-content: space-between;
+    padding: 1rem;
     margin: 0 auto;
     background-color: #000000;
+    min-height: 200px;
+}
 
-    button {
-        width: 200px;
-        margin: 0 auto;
-        background-color: var(--tg-theme-button-color);
-        color: var(--tg-theme-button-text-color);
-    }
+.welcome button {
+    width: 200px;
+    margin: 0 auto;
+    background-color: var(--tg-theme-button-color);
+    color: var(--tg-theme-button-text-color);
 }
 
 .logo {
@@ -81,7 +88,6 @@ h1 {
     color: #888;
 }
 
-
 .loading {
     position: absolute;
     top: 0;
@@ -94,7 +100,6 @@ h1 {
     align-items: center;
 }
 
-
 .iframe-modal {
     position: fixed;
     top: 0;
@@ -103,26 +108,56 @@ h1 {
     width: 100%;
     height: 100vh;
     z-index: 99;
+}
 
-    iframe {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100vh;
-    }
+.iframe-modal iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+}
 
-    .close {
-        position: absolute;
-        top: 5%;
-        right: 5%;
-        z-index: 999;
-        cursor: pointer;
-        color: var(--tg-theme-text-color);
-    }
+.iframe-modal .close {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    z-index: 999;
+    cursor: pointer;
+    color: var(--tg-theme-text-color);
 }
 
 .search-result-item {
     margin: 10px 0;
+}
+
+.movie-card {
+    background: var(--tg-theme-bg-color, #0F1017);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card:hover {
+    transform: translateY(-2px);
+}
+
+.movie-card img {
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+}
+
+.movie-card h3 {
+    padding: 0.75rem;
+    color: var(--tg-theme-text-color, #ffffff);
+    margin: 0;
+}
+
+.movies-list {
+    flex: 1;
+    margin-bottom: 80px;
 }
