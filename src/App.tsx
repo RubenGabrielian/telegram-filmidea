@@ -13,7 +13,6 @@ import {sha512} from "js-sha512";
 import {useNavigate, useLocation} from "react-router-dom";
 import Loading from './components/Loading/index.tsx';
 import MovieTabs from './components/tabs/MovieTabs';
-import Film from './pages/Film';
 import { Movie, mockMovies } from './mocks/movies';
 
 function App() {
