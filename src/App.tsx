@@ -117,17 +117,18 @@ function App() {
                 ) : (
                     <>
                         <div className="content-wrapper">
-                            <MovieTabs activeTab={activeTab} onTabChange={setActiveTab} />
-                            
                             <div className="welcome">
                                 <div className={'flex flex-wrap justify-center'}>
                                     <h1 className={'font-bold mb-2'}>Ищете что</h1>
                                     <div>
                                         <img src={AvatarsImg} alt=""/>
                                     </div>
-                                    <h1 className={'font-bold mb-2'}>посмотреть? </h1>
+                                    <h1 className={'font-bold mb-5'}>посмотреть? </h1>
                                 </div>
                                 <Button text={'Дайте мне идею'} onclick={handleClick}/>
+                            </div>
+                            <div className='movies-tabs-wrapper'>
+                                <MovieTabs activeTab={activeTab} onTabChange={setActiveTab} />
                             </div>
 
                             <div className="movies-list">
