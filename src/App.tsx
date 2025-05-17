@@ -13,6 +13,7 @@ import {sha512} from "js-sha512";
 import {useNavigate, useLocation} from "react-router-dom";
 import Loading from './components/Loading/index.tsx';
 import MovieTabs from './components/tabs/MovieTabs';
+import MoviePlaceholderIcon from './components/svgs/MoviePlaceholderIcon';
 
 interface Movie {
     id: number;
@@ -142,11 +143,17 @@ function App() {
                                                 className="movie-card"
                                                 onClick={() => navigate(`/film/${movie.id}`)}
                                             >
-                                                <img 
-                                                    src={movie.poster?.kp_preview_url} 
-                                                    alt={movie.name}
-                                                    className="w-full h-auto rounded-lg"
-                                                />
+                                                {movie.poster?.kp_preview_url ? (
+                                                    <img 
+                                                        src={movie.poster.kp_preview_url} 
+                                                        alt={movie.name}
+                                                        className="w-full h-auto rounded-lg"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full aspect-[2/3] rounded-lg bg-[#181818] flex items-center justify-center">
+                                                        <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+                                                    </div>
+                                                )}
                                                 <h3 className="text-sm font-medium mt-2 line-clamp-2">
                                                     {movie.name || movie.alternative_name}
                                                 </h3>
