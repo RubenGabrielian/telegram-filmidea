@@ -1,50 +1,48 @@
 .movie-tabs {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    background: var(--tg-theme-bg-color, #0F1017);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: #111;
+    border-top: 1.5px solid #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 64px;
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.25);
 }
 
 .tabs-container {
     display: flex;
-    gap: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.5rem;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
 }
 
 .tab {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.5rem;
     border: none;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--tg-theme-hint-color, #8E9BA7);
-    font-weight: 500;
+    background: none;
     cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.tab:hover {
-    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    color: #888;
+    font-size: 2rem;
 }
 
 .tab.active {
-    background: var(--tg-theme-button-color, #2481cc);
-    color: var(--tg-theme-button-text-color, #ffffff);
+    color: #FFD600;
+    background: rgba(255, 214, 0, 0.08);
+    transform: scale(1.15);
 }
 
 .tab svg {
-    width: 20px;
-    height: 20px;
+    width: 36px;
+    height: 36px;
 }
 
 .tab span {

@@ -16,14 +16,12 @@ export default function MovieTabs({ onTabChange, activeTab }: MovieTabsProps) {
                     onClick={() => onTabChange('liked')}
                 >
                     <HeartIcon active={activeTab === 'liked'} />
-                    <span>Liked</span>
                 </button>
                 <button 
                     className={`tab ${activeTab === 'watched' ? 'active' : ''}`}
                     onClick={() => onTabChange('watched')}
                 >
                     <EyeIcon active={activeTab === 'watched'} />
-                    <span>Watched</span>
                 </button>
             </div>
         </div>

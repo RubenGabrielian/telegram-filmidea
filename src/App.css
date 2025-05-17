@@ -7,8 +7,8 @@
 .main {
     width: 100vw;
     min-height: 100vh;
-    padding-bottom: 20px;
-    background-color: #000000;
+    padding-bottom: 80px;
+    background: var(--tg-theme-bg-color);
     color: var(--tg-theme-text-color);
 }
 
@@ -132,13 +132,33 @@ h1 {
     margin: 10px 0;
 }
 
+.movies-list {
+    flex: 1;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+}
+
 .movie-card {
-    background: var(--tg-theme-bg-color, #0F1017);
-    border-radius: 12px;
+    background: #181818;
+    border-radius: 20px;
     overflow: hidden;
     transition: transform 0.2s ease;
     cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+    width: 220px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .movie-card:hover {
@@ -149,15 +169,16 @@ h1 {
     width: 100%;
     aspect-ratio: 2/3;
     object-fit: cover;
+    border-radius: 20px 20px 0 0;
 }
 
 .movie-card h3 {
-    padding: 0.75rem;
-    color: var(--tg-theme-text-color, #ffffff);
+    padding: 1rem 0.5rem 1.2rem 0.5rem;
+    color: #fff;
     margin: 0;
-}
-
-.movies-list {
-    flex: 1;
-    margin-bottom: 80px;
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.3;
 }
