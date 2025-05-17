@@ -95,15 +95,18 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                             }
                             {
                                 searchResult.length ? (
-                                    <div>
+                                    <div className="grid grid-cols-2 gap-4 w-full">
                                         {
                                             searchResult?.map((movie: Movie) => (
-                                                   <div className="search-result-item">
-                                                        <a href={`/film/${movie?.id}`}>
-                                                            <img src={movie?.poster} alt="" className='w-full h-[170px] rounded-2xl object-cover'/>
-                                                        </a>
-                                                   </div>
-
+                                                <div key={movie.id} className="search-result-item">
+                                                    <a href={`/film/${movie?.id}`}>
+                                                        <img 
+                                                            src={movie?.poster} 
+                                                            alt={movie.alternative_name} 
+                                                            className='w-full h-[200px] rounded-2xl object-cover'
+                                                        />
+                                                    </a>
+                                                </div>
                                             ))
                                         }
                                     </div>
