@@ -15,6 +15,7 @@ import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
 export default function FilmView({film, setFilm, isLoading}: { film: any, setFilm: any, isLoading: boolean }) {
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [isChanging, setIsChanging] = useState(false);
 
     const miniAppURL = `https://t.me/filmidea_bot?startapp=${film?.id}`
 
@@ -26,6 +27,16 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             console.log(film);
         }
     }, [film]);
+
+    useEffect(() => {
+        if (film) {
+            setIsChanging(true);
+            const timer = setTimeout(() => {
+                setIsChanging(false);
+            }, 300);
+            return () => clearTimeout(timer);
+        }
+    }, [film?.id]);
 
     const handlePlay = () => {
         setLoading(true);
@@ -75,7 +86,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     return (
         <div className={'film container px-6 pb-[120px]'}>
             {
-                isLoading ? <Loading /> : null
+                (isLoading || isChanging) ? <Loading /> : null
             }
             {
                 iframe ? (
@@ -90,78 +101,70 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             {
                 loading && <Loading />
             }
-            <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
-           <div className="genres flex gap-3 mb-3 flex-wrap">
-               {
-                   // @ts-ignore
-                   film?.genres?.map((genre, index) => (
-                       <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
-                   ))
-               }
-               <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} мин.</div>
-           </div>
-            <div className="poster">
-                {film?.poster?.kp_preview_url ? (
-                    <img 
-                        src={film.poster.kp_preview_url} 
-                        width={'100%'} 
-                        alt={film.name || film.alternative_name}
-                        className="w-full aspect-[2/3] object-cover"
-                    />
-                ) : (
-                    <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center">
-                        <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+            {!isChanging && (
+                <>
+                    <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
+                    <div className="genres flex gap-3 mb-3 flex-wrap">
+                        {
+                            // @ts-ignore
+                            film?.genres?.map((genre, index) => (
+                                <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
+                            ))
+                        }
+                        <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} мин.</div>
                     </div>
-                )}
-                {/*<a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>*/}
-                    <div className="play" onClick={handlePlay}>
-                        <PlayIcon/>
+                    <div className="poster">
+                        {film?.poster?.kp_preview_url ? (
+                            <img 
+                                src={film.poster.kp_preview_url} 
+                                width={'100%'} 
+                                alt={film.name || film.alternative_name}
+                                className="w-full aspect-[2/3] object-cover"
+                            />
+                        ) : (
+                            <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center">
+                                <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+                            </div>
+                        )}
+                        <div className="play" onClick={handlePlay}>
+                            <PlayIcon/>
+                        </div>
                     </div>
-                {/*</a>*/}
-            </div>
-            <div className="actions">
-                <div className="like action-btn" onClick={handleLike}>
-                    <LikeIcon active={!!film?.user_is_liked}/>
-                </div>
-                <div className="share action-btn">
-                    <a
-                        className="decoration-0"
-                        href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Film!')}`}
-                    >
-                        <ShareIcon/>
-                    </a>
-                </div>
-            </div>
-            <div className="emojies flex items-center justify-between">
-                <div className={getEmojiClass('bad')} onClick={() => handleRate('bad')}>
-                    <img src={Emoji1} alt=""/>
-                </div>
-                <div className={getEmojiClass('normal')} onClick={() => handleRate('normal')}>
-                    <img src={Emoji2} alt=""/>
-                </div>
-                <div className={getEmojiClass('good')} onClick={() => handleRate('good')}>
-                    <img src={Emoji3} alt=""/>
-                </div>
-                <div className={getEmojiClass('excellent')} onClick={() => handleRate('excellent')}>
-                    <img src={Emoji4} alt=""/>
-                </div>
-            </div>
-            <div className="info-blocks my-3">
-                {/*<div className="info-block">*/}
-                {/*    <span className={'rating'}>{film?.partner_ratings[0].rating}</span><span className={'partner'}>Kino Poisk</span>*/}
-                {/*</div>*/}
-                {/*<div className="info-block">*/}
-                {/*    <span className={'rating'}>{film?.partner_ratings[1].rating}</span><span*/}
-                {/*    className={'partner'}>IMDB</span>*/}
-                {/*</div>*/}
-            </div>
-            <div className="description bg-[#0F1017] p-4 rounded-md">
-                <p className={'mb-3'}>
-                    <b className='text-white'>Описания</b>
-                </p>
-                <p className={'text-[#8E9BA7]'}>{film?.description}</p>
-            </div>
-
+                    <div className="actions">
+                        <div className="like action-btn" onClick={handleLike}>
+                            <LikeIcon active={!!film?.user_is_liked}/>
+                        </div>
+                        <div className="share action-btn">
+                            <a
+                                className="decoration-0"
+                                href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Film!')}`}
+                            >
+                                <ShareIcon/>
+                            </a>
+                        </div>
+                    </div>
+                    <div className="emojies flex items-center justify-between">
+                        <div className={getEmojiClass('bad')} onClick={() => handleRate('bad')}>
+                            <img src={Emoji1} alt=""/>
+                        </div>
+                        <div className={getEmojiClass('normal')} onClick={() => handleRate('normal')}>
+                            <img src={Emoji2} alt=""/>
+                        </div>
+                        <div className={getEmojiClass('good')} onClick={() => handleRate('good')}>
+                            <img src={Emoji3} alt=""/>
+                        </div>
+                        <div className={getEmojiClass('excellent')} onClick={() => handleRate('excellent')}>
+                            <img src={Emoji4} alt=""/>
+                        </div>
+                    </div>
+                    <div className="description bg-[#0F1017] p-4 rounded-md">
+                        <p className={'mb-3'}>
+                            <b className='text-white'>Описания</b>
+                        </p>
+                        <p className={'text-[#8E9BA7]'}>{film?.description}</p>
+                    </div>
+                </>
+            )}
         </div>
     )
 }

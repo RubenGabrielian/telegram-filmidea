@@ -83,7 +83,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                         {
                             !searchResult.length ? (
                                 <div
-                                    className="relative mb-5 h-[200px] w-full flex items-center justify-center rounded-2xl"
+                                    className="relative mb-5 h-[200px] w-full flex items-center justify-center rounded-2xl bg-[#09033b]"
                                     onClick={() => handleGiveMeIdeaByGenre()}>
                                     <GiveMeIdeaIcon/>
                                 </div>
@@ -117,7 +117,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                 </div>
                             ) : categories.length ? (
                                 categories.map((item: Category) => (
-                                    <div key={item?.id} className="relative mb-5 w-full"
+                                    <div key={item?.id} className="relative bg-[#09033b] mb-5 w-full"
                                          onClick={() => handleGiveMeIdeaByGenre(item.id)}>
                                         <div 
                                             className="w-full h-[200px] rounded-lg bg-cover bg-center bg-no-repeat"
