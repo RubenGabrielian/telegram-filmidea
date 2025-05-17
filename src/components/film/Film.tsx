@@ -16,6 +16,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     const [iframe, setIframe] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isChanging, setIsChanging] = useState(false);
+    const [prevFilmId, setPrevFilmId] = useState<number | null>(null);
 
     const miniAppURL = `https://t.me/filmidea_bot?startapp=${film?.id}`
 
@@ -24,19 +25,17 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             setLoading(true);
         } else {
             setLoading(false);
-            console.log(film);
+            // Check if film ID has changed
+            if (prevFilmId !== film.id) {
+                setIsChanging(true);
+                setPrevFilmId(film.id);
+                // Short timeout to ensure smooth transition
+                setTimeout(() => {
+                    setIsChanging(false);
+                }, 150);
+            }
         }
     }, [film]);
-
-    useEffect(() => {
-        if (film) {
-            setIsChanging(true);
-            const timer = setTimeout(() => {
-                setIsChanging(false);
-            }, 300);
-            return () => clearTimeout(timer);
-        }
-    }, [film?.id]);
 
     const handlePlay = () => {
         setLoading(true);
@@ -84,9 +83,13 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     }
 
     return (
-        <div className={'film container px-6 pb-[120px]'}>
+        <div className={'film container px-6 pb-[120px] relative'}>
             {
-                (isLoading || isChanging) ? <Loading /> : null
+                (isLoading || (isChanging && !film)) ? (
+                    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+                        <Loading />
+                    </div>
+                ) : null
             }
             {
                 iframe ? (
@@ -99,9 +102,13 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                 ) : null
             }
             {
-                loading && <Loading />
+                loading && (
+                    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+                        <Loading />
+                    </div>
+                )
             }
-            {!isChanging && (
+            {film && (
                 <>
                     <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
                     <div className="genres flex gap-3 mb-3 flex-wrap">
