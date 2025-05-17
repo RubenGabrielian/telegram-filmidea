@@ -126,7 +126,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                                 backgroundColor: '#181818'
                                             }}
                                         />
-                                        <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
+                                        <h4 className="absolute bottom-4 left-3 text-2xl text-white">{item.name}</h4>
                                     </div>
                                 ))
                             ) : <Loading/>
