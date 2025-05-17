@@ -107,7 +107,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                                                 className='w-full h-[200px] rounded-2xl object-cover'
                                                             />
                                                         ) : (
-                                                            <div className="w-full aspect-[2/3] rounded-2xl bg-[#181818] flex items-center justify-center">
+                                                            <div className="w-full h-[200px] rounded-2xl bg-[#181818] flex items-center justify-center">
                                                                 <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
                                                             </div>
                                                         )}
