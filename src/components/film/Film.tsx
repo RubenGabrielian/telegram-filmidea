@@ -86,7 +86,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
         <div className={'film container px-6 pb-[120px] relative'}>
             {
                 (isLoading || (isChanging && !film)) ? (
-                    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+                    <div className="fixed inset-0 bg-black h-full z-50 flex items-center justify-center">
                         <Loading />
                     </div>
                 ) : null
@@ -103,7 +103,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             }
             {
                 loading && (
-                    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+                    <div className="fixed inset-0 bg-black z-50 flex h-full items-center justify-center">
                         <Loading />
                     </div>
                 )
