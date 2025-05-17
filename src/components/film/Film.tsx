@@ -10,6 +10,7 @@ import axiosInstance from "../../api/axiosInstance.ts";
 import {useEffect, useState} from "react";
 import CloseIcon from "../svgs/CloseIcon.tsx";
 import Loading from "../Loading";
+import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
 
 export default function FilmView({film, setFilm, isLoading}: { film: any, setFilm: any, isLoading: boolean }) {
     const [iframe, setIframe] = useState(null);
@@ -100,7 +101,18 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} мин.</div>
            </div>
             <div className="poster">
-                <img src={film?.poster?.kp_preview_url} width={'100%'} alt=""/>
+                {film?.poster?.kp_preview_url ? (
+                    <img 
+                        src={film.poster.kp_preview_url} 
+                        width={'100%'} 
+                        alt={film.name || film.alternative_name}
+                        className="w-full aspect-[2/3] object-cover"
+                    />
+                ) : (
+                    <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center">
+                        <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+                    </div>
+                )}
                 {/*<a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>*/}
                     <div className="play" onClick={handlePlay}>
                         <PlayIcon/>
