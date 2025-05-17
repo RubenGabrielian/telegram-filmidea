@@ -27,7 +27,6 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
-    const [imageErrors, setImageErrors] = useState<{[key: number]: boolean}>({});
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -55,11 +54,6 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
             setOpen(false)
         }
     }, [loading]);
-
-    const handleImageError = (id: number) => {
-        console.error(`Failed to load image for category ${id}`);
-        setImageErrors(prev => ({...prev, [id]: true}));
-    };
 
     // @ts-ignore
     return (
@@ -117,23 +111,13 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                     categories.map((item: Category) => (
                                         <div key={item?.id} className="relative mb-5 w-full"
                                              onClick={() => handleGiveMeIdeaByGenre(item.id)}>
-                                            {!imageErrors[item.id] ? (
-                                                <img 
-                                                    src={item.background} 
-                                                    alt={item.name}
-                                                    className="w-full h-[200px] object-cover rounded-lg"
-                                                    loading="eager"
-                                                    crossOrigin="anonymous"
-                                                    onError={() => handleImageError(item.id)}
-                                                    onLoad={() => console.log(`Successfully loaded image for category ${item.id}`)}
-                                                />
-                                            ) : (
-                                                <div 
-                                                    className="w-full h-[200px] rounded-lg bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center"
-                                                >
-                                                    <span className="text-white text-lg">{item.name}</span>
-                                                </div>
-                                            )}
+                                            <div 
+                                                className="w-full h-[200px] rounded-lg bg-cover bg-center bg-no-repeat"
+                                                style={{
+                                                    backgroundImage: `url(${item.background})`,
+                                                    backgroundColor: '#181818'
+                                                }}
+                                            />
                                             <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
                                         </div>
                                     ))
