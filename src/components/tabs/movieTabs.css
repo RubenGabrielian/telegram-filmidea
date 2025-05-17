@@ -18,24 +18,27 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    border: none;
+    border: 2px solid transparent;
     background: none;
     cursor: pointer;
     border-radius: 50%;
-    transition: background 0.2s, color 0.2s, transform 0.2s;
+    transition: all 0.2s ease;
     color: #888;
     font-size: 2rem;
 }
 
 .tab.active {
-    color: #FFD600;
-    background: rgba(255, 214, 0, 0.08);
+    color: #febe13;
     transform: scale(1.15);
 }
 
 .tab svg {
-    width: 36px;
-    height: 36px;
+    stroke: currentColor;
+    fill: none;
+}
+
+.tab.active svg {
+    fill: #febe13;
 }
 
 .tab span {

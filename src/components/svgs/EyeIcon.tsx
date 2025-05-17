@@ -5,17 +5,17 @@ interface EyeIconProps {
 export default function EyeIcon({ active = false }: EyeIconProps) {
     return (
         <svg 
-            width="24" 
-            height="24" 
+            width="29" 
+            height="29" 
             viewBox="0 0 24 24" 
             fill="none" 
             xmlns="http://www.w3.org/2000/svg"
         >
             <path 
                 d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" 
-                fill={active ? "currentColor" : "none"}
-                stroke="currentColor"
-                strokeWidth="2"
+                fill="none"
+                stroke={active ? "#febe13" : "currentColor"}
+                strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
@@ -23,9 +23,9 @@ export default function EyeIcon({ active = false }: EyeIconProps) {
                 cx="12" 
                 cy="12" 
                 r="3" 
-                fill={active ? "currentColor" : "none"}
-                stroke="currentColor"
-                strokeWidth="2"
+                fill="none"
+                stroke={active ? "#febe13" : "currentColor"}
+                strokeWidth="1"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             />
