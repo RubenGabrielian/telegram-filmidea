@@ -1,46 +1,62 @@
+import comedyBg from './assets/genres/comedy.webp';
+import thrillerBg from './assets/genres/thriller.webp';
+import familyBg from './assets/genres/family.webp';
+import animeBg from './assets/genres/anime.webp';
+import actionBg from './assets/genres/action.webp';
+import dramaBg from './assets/genres/drama.webp';
+import melodramaBg from './assets/genres/melodrama.webp';
+
+import comedyLogo from './assets/genres/comedy.png';
+import thrillerLogo from './assets/genres/thriller.png';
+import familyLogo from './assets/genres/family.png';
+import animeLogo from './assets/genres/anime.png';
+import actionLogo from './assets/genres/action.png';
+import dramaLogo from './assets/genres/drama.png';
+import melodramaLogo from './assets/genres/melodrama.png';
+
 export const SECRET = "Kl9bPhd1JbWN0BxyP0V9s9qRQJFUQHv22Hjw3pRFQjUmERrmglvHvQPqQt4KamI6";
 
 export const CATEGORIES = [
     {
         "id": 6,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/comedy.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/comedy.webp",
+        "logo": comedyLogo,
+        "background": comedyBg,
         "name": "комедия"
     },
     {
         "id": 3,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/thriller.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/thriller.webp",
+        "logo": thrillerLogo,
+        "background": thrillerBg,
         "name": "триллер"
     },
     {
         "id": 7,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/family.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/family.webp",
+        "logo": familyLogo,
+        "background": familyBg,
         "name": "семейный"
     },
     {
         "id": 21,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/anime.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/animation.webp",
+        "logo": animeLogo,
+        "background": animeBg,
         "name": "аниме"
     },
     {
         "id": 2,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/fighter.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/action.webp",
+        "logo": actionLogo,
+        "background": actionBg,
         "name": "боевик"
     },
     {
         "id": 9,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/drama.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/drama.webp",
+        "logo": dramaLogo,
+        "background": dramaBg,
         "name": "драма"
     },
     {
         "id": 5,
-        "logo": "http://devback.filmidea.tv/storage/images/genres/melodrama.png",
-        "background": "http://devback.filmidea.tv/storage/images/genres/backgrounds/melodrama.webp",
+        "logo": melodramaLogo,
+        "background": melodramaBg,
         "name": "мелодрама"
     }
 ] as const;
