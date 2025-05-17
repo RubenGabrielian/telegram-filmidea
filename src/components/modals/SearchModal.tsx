@@ -7,6 +7,7 @@ import Loading from "../Loading";
 import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import GiveMeIdeaIcon from "../svgs/GiveMeIdeaIcon.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
+import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
 
 interface Category {
     id: number,
@@ -87,7 +88,6 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                 !searchResult.length ? (
                                     <div
                                         className="relative mb-5 h-[200px] w-full flex items-center justify-center rounded-2xl"
-                                        style={{background: 'linear-gradient(180.01deg, rgba(19, 2, 151, 0.54) 12.32%, rgba(15, 3, 156, 0.54) 60.48%, rgba(59, 65, 221, 0) 106.27%)'}}
                                         onClick={() => handleGiveMeIdeaByGenre()}>
                                         <GiveMeIdeaIcon/>
                                     </div>
@@ -100,11 +100,17 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                             searchResult?.map((movie: Movie) => (
                                                 <div key={movie.id} className="search-result-item">
                                                     <a href={`/film/${movie?.id}`}>
-                                                        <img 
-                                                            src={movie?.poster} 
-                                                            alt={movie.alternative_name} 
-                                                            className='w-full h-[200px] rounded-2xl object-cover'
-                                                        />
+                                                        {movie.poster ? (
+                                                            <img 
+                                                                src={movie.poster} 
+                                                                alt={movie.alternative_name} 
+                                                                className='w-full h-[200px] rounded-2xl object-cover'
+                                                            />
+                                                        ) : (
+                                                            <div className="w-full aspect-[2/3] rounded-2xl bg-[#181818] flex items-center justify-center">
+                                                                <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+                                                            </div>
+                                                        )}
                                                     </a>
                                                 </div>
                                             ))
