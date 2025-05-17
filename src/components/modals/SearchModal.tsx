@@ -99,7 +99,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                         {
                                             searchResult?.map((movie: Movie) => (
                                                 <div key={movie.id} className="search-result-item">
-                                                    <a href={`/film/${movie?.id}`}>
+                                                    <a href={`/film/${movie?.id}`} className="block">
                                                         {movie.poster ? (
                                                             <img 
                                                                 src={movie.poster} 
@@ -111,6 +111,9 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                                                 <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
                                                             </div>
                                                         )}
+                                                        <h3 className="text-sm font-medium mt-2 line-clamp-2 text-center">
+                                                            {movie.alternative_name}
+                                                        </h3>
                                                     </a>
                                                 </div>
                                             ))
