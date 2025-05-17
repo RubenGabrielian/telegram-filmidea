@@ -111,7 +111,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                     categories.map((item: Category) => (
                                         <div key={item?.id} className="relative mb-5 w-full"
                                              onClick={() => handleGiveMeIdeaByGenre(item.id)}>
-                                            <img className="w-full" src={item?.background} alt=""/>
+                                            <img className="w-full" src={'https://i.ebayimg.com/images/g/DOMAAOSwXNBnHlsX/s-l1600.webp'} alt=""/>
                                             <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
                                         </div>
                                     ))
