@@ -106,11 +106,11 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         src={film.poster.kp_preview_url} 
                         width={'100%'} 
                         alt={film.name || film.alternative_name}
-                        className="w-full aspect-[2/3] object-cover"
+                        className="w-full aspect-[2/3] object-cover rounded-lg"
                     />
                 ) : (
-                    <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center">
-                        <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
+                    <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center rounded-lg">
+                        <MoviePlaceholderIcon className="w-[54px] h-[76px] opacity-50" />
                     </div>
                 )}
                 {/*<a href={`https://www.filmidea.tv/ru/movie/${film.id}`}>*/}
