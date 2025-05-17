@@ -8,6 +8,7 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import GiveMeIdeaIcon from "../svgs/GiveMeIdeaIcon.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
+import { CATEGORIES } from '../../consts';
 
 interface Category {
     id: number,
@@ -23,7 +24,7 @@ interface Movie {
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
 
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState(CATEGORIES);
     const {handleGiveIdea, loading} = useGiveIdea();
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
@@ -44,11 +45,6 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
             // Reset show images state when modal opens
             setShowCategoryImages(false);
             
-            // Fetch categories
-            axiosInstance.get('/genres/search').then((r) => {
-                setCategories(r.data.data);
-            });
-
             // Set a timeout to show images after 2 seconds
             const timer = setTimeout(() => {
                 setShowCategoryImages(true);
