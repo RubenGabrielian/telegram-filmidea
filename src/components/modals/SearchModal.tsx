@@ -23,13 +23,11 @@ interface Movie {
 }
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
-
-    const [categories, setCategories] = useState(CATEGORIES);
+    const [showCategoryImages, setShowCategoryImages] = useState(false);
     const {handleGiveIdea, loading} = useGiveIdea();
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
-    const [showCategoryImages, setShowCategoryImages] = useState(false);
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -128,8 +126,8 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                             ))
                                         }
                                     </div>
-                                ) : categories.length ? (
-                                    categories.map((item: Category) => (
+                                ) : CATEGORIES.length ? (
+                                    CATEGORIES.map((item: Category) => (
                                         <div key={item?.id} className="relative mb-5 w-full"
                                              onClick={() => handleGiveMeIdeaByGenre(item.id)}>
                                             {showCategoryImages ? (
