@@ -8,7 +8,6 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import GiveMeIdeaIcon from "../svgs/GiveMeIdeaIcon.tsx";
 import useDebounce from "../../hooks/useDebounce.tsx";
 import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
-import { CATEGORIES } from '../../consts';
 
 interface Category {
     id: number,
@@ -27,6 +26,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -35,6 +35,14 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
             })
         }
     }, [debouncedSearchTerm]);
+
+    useEffect(() => {
+        if (isOpen) {
+            axiosInstance.get('/genres/search').then((r) => {
+                setCategories(r.data.data);
+            })
+        }
+    }, [isOpen]);
 
     useEffect(() => {
         if (loading) {
@@ -107,8 +115,8 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                         ))
                                     }
                                 </div>
-                            ) : CATEGORIES.length ? (
-                                CATEGORIES.map((item: Category) => (
+                            ) : categories.length ? (
+                                categories.map((item: Category) => (
                                     <div key={item?.id} className="relative mb-5 w-full"
                                          onClick={() => handleGiveMeIdeaByGenre(item.id)}>
                                         <div 
