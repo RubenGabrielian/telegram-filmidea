@@ -28,6 +28,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
+    const [showCategoryImages, setShowCategoryImages] = useState(false);
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -40,9 +41,21 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
 
     useEffect(() => {
         if (isOpen) {
+            // Reset show images state when modal opens
+            setShowCategoryImages(false);
+            
+            // Fetch categories
             axiosInstance.get('/genres/search').then((r) => {
                 setCategories(r.data.data);
-            })
+            });
+
+            // Set a timeout to show images after 2 seconds
+            const timer = setTimeout(() => {
+                setShowCategoryImages(true);
+            }, 2000);
+
+            // Cleanup timeout if component unmounts
+            return () => clearTimeout(timer);
         }
     }, [isOpen]);
 
@@ -123,13 +136,19 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                     categories.map((item: Category) => (
                                         <div key={item?.id} className="relative mb-5 w-full"
                                              onClick={() => handleGiveMeIdeaByGenre(item.id)}>
-                                            <div 
-                                                className="w-full h-[200px] rounded-lg bg-cover bg-center bg-no-repeat"
-                                                style={{
-                                                    backgroundImage: `url(${item.background})`,
-                                                    backgroundColor: '#181818'
-                                                }}
-                                            />
+                                            {showCategoryImages ? (
+                                                <div 
+                                                    className="w-full h-[200px] rounded-lg bg-cover bg-center bg-no-repeat"
+                                                    style={{
+                                                        backgroundImage: `url(${item.background})`,
+                                                        backgroundColor: '#181818'
+                                                    }}
+                                                />
+                                            ) : (
+                                                <div className="w-full h-[200px] rounded-lg bg-[#181818] flex items-center justify-center">
+                                                    <div className="animate-pulse w-full h-full rounded-lg bg-[#2a2a2a]" />
+                                                </div>
+                                            )}
                                             <h4 className="absolute bottom-4 left-3 text-2xl">{item.name}</h4>
                                         </div>
                                     ))
