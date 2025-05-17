@@ -136,7 +136,7 @@ function App() {
                                 {moviesLoading ? (
                                     <Loading />
                                 ) : movies.length > 0 ? (
-                                    <div className="grid">
+                                    <div className="grid grid-home">
                                         {movies.map((movie) => (
                                             <div 
                                                 key={movie.id} 
