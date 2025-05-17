@@ -135,7 +135,7 @@ function App() {
                                 {moviesLoading ? (
                                     <Loading />
                                 ) : movies.length > 0 ? (
-                                    <div className="grid grid-cols-2 gap-4 p-4">
+                                    <div className="grid">
                                         {movies.map((movie) => (
                                             <div 
                                                 key={movie.id} 
