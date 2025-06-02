@@ -7,6 +7,7 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import {useState} from "react";
 import SearchModal from "../modals/SearchModal.tsx";
 import Loading from '../Loading/index.tsx';
+import {WebApp} from "@telegram/web-app";
 
 export default function Footer() {
     const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
@@ -31,8 +32,9 @@ export default function Footer() {
 
     const handleHomeClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        // Use hard reload to ensure clean state
-        window.location.href = '/';
+        // Close current WebApp and open fresh bot link to clear startapp
+        WebApp.close();
+        WebApp.openTelegramLink('https://t.me/filmidea_bot');
     };
 
     return (
