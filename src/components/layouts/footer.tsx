@@ -7,7 +7,6 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import {useState} from "react";
 import SearchModal from "../modals/SearchModal.tsx";
 import Loading from '../Loading/index.tsx';
-import WebApp from "@twa-dev/sdk";
 
 export default function Footer() {
     const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
@@ -30,10 +29,6 @@ export default function Footer() {
         setOpenSearchModal(true);
     }
 
-    const handleHomeClick = (e: React.MouseEvent) => {
-        e.preventDefault();
-        // Close current WebApp and open fresh bot link to clear startapp
-    };
 
     return (
         <>
@@ -41,7 +36,7 @@ export default function Footer() {
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
                 <ul>
                     <li>
-                        <Link to={'/'} onClick={handleHomeClick}>
+                        <Link to={'/'} >
                             <HomeIcon active={location.pathname === '/'}/>
                         </Link>
                     </li>
