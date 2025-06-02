@@ -32,7 +32,8 @@ export default function Footer() {
 
     const handleHomeClick = (e: React.MouseEvent) => {
         e.preventDefault();
-        navigate('/', { replace: true });
+        // Use hard reload to ensure clean state
+        window.location.href = '/';
     };
 
     return (
