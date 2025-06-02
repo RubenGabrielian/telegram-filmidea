@@ -99,7 +99,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                                     {movie.poster ? (
                                                         <img 
                                                             src={movie.poster} 
-                                                            alt={movie.alternative_name} 
+                                                            alt={movie.name} 
                                                             className='w-full h-[200px] rounded-2xl object-cover'
                                                         />
                                                     ) : (
