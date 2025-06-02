@@ -1,5 +1,5 @@
 import './footer.css'
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import LogoIcon from "../svgs/LogoIcon.tsx";
 import HomeIcon from "../svgs/HomeIcon.tsx";
 import SearchIcon from "../svgs/SearchIcon.tsx";
