@@ -136,15 +136,14 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         </div>
                     </div>
                     <div className="actions">
-                        <div className="like action-btn" onClick={handleBookmark}>
-                            <BookmarkIcon active={!!film?.is_default_watchlist}/>
+                        <div className="action-btn" onClick={handleBookmark}>
+                            <BookmarkIcon active={!!film?.is_default_watchlist} className="w-8 h-8" />
                         </div>
-                        <div className="share action-btn">
+                        <div className="action-btn">
                             <a
-                                className="decoration-0"
                                 href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent('Check out this Film!')}`}
                             >
-                                <ShareIcon/>
+                                <ShareIcon />
                             </a>
                         </div>
                     </div>
