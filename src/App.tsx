@@ -41,6 +41,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [hasProcessedStartParam, setHasProcessedStartParam] = useState(false);
 
     useEffect(() => {
         // Handle theme
@@ -58,22 +59,12 @@ function App() {
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam) {
-            // Check if this start_param has been processed before
-            const processedParams = JSON.parse(localStorage.getItem('processedStartParams') || '[]');
-            if (!processedParams.includes(startParam)) {
-                // Add this start_param to processed list
-                processedParams.push(startParam);
-                localStorage.setItem('processedStartParams', JSON.stringify(processedParams));
-                
-                // Navigate to the film
-                navigate(`/film/${startParam}`, { replace: false });
-                
-                // After a short delay, clear the start_param from URL
-                setTimeout(() => {
-                    const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
-                    window.history.replaceState({}, '', newUrl);
-                }, 1000);
-            }
+            // Immediately remove start_param from URL
+            const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
+            window.history.replaceState({}, '', newUrl);
+            
+            // Navigate to the film
+            navigate(`/film/${startParam}`, { replace: false });
         }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
