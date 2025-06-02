@@ -41,8 +41,8 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const [hasProcessedStartParam, setHasProcessedStartParam] = useState(false);
 
+    
     useEffect(() => {
         // Handle theme
         const setTheme = () => {
