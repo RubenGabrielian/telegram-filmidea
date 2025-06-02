@@ -17,7 +17,7 @@ interface Category {
 
 interface Movie {
     id: number,
-    alternative_name: string
+    name: string
     poster: string
 }
 
