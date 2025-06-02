@@ -91,7 +91,7 @@ function App() {
                     : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
                 const response = await AxiosInstance.get(endpoint);
                 setMovies(activeTab === 'watchlist' 
-                    ? response?.data?.data || []
+                    ? response?.data?.data?.data || []
                     : response?.data?.data?.data || []
                 );
             } catch (error) {
