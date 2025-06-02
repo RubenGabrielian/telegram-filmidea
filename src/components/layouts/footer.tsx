@@ -9,13 +9,21 @@ import SearchModal from "../modals/SearchModal.tsx";
 import Loading from '../Loading/index.tsx';
 
 export default function Footer() {
-    const {handleGiveIdea, loading} = useGiveIdea();
+    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
     const location = useLocation();
     const navigate = useNavigate();
     const [openSearchModal, setOpenSearchModal] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
-    const giveMeIdeaHandler = () => {
-        handleGiveIdea();
+    const giveMeIdeaHandler = async () => {
+        setIsTransitioning(true); // Show loading immediately
+        const film = await handleGiveIdea();
+        if (film?.id) {
+            // Hard reload to the new film page
+            window.location.href = `/film/${film.id}`;
+        } else {
+            setIsTransitioning(false); // Reset if no film was found
+        }
     };
 
     const handleOpenSearch = () => {
@@ -29,7 +37,7 @@ export default function Footer() {
 
     return (
         <>
-            {loading && <div className={'loading'}><Loading /></div>}
+            {(giveIdeaLoading || isTransitioning) && <div className={'loading'}><Loading /></div>}
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
                 <ul>
                     <li>

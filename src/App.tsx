@@ -32,7 +32,7 @@ interface Movie {
 }
 
 function App() {
-    const { handleGiveIdea, loading } = useGiveIdea();
+    const { handleGiveIdea, loading: giveIdeaLoading } = useGiveIdea();
     const navigate = useNavigate();
     const location = useLocation();
     const [activeTab, setActiveTab] = useState<'watchlist' | 'watched'>('watchlist');
@@ -40,6 +40,7 @@ function App() {
     const [moviesLoading, setMoviesLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     useEffect(() => {
         // Handle theme
@@ -57,10 +58,11 @@ function App() {
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam && location.pathname === '/') {
-            // Navigate to film and clear the start_param
+            // Navigate to film and remove start_param from URL
             navigate(`/film/${startParam}`, { replace: true });
-            // Clear the start_param from WebApp.initDataUnsafe
-            WebApp.initDataUnsafe.start_param = '';
+            // Remove start_param from URL without triggering a reload
+            const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
+            window.history.replaceState({}, '', newUrl);
         }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
@@ -141,15 +143,22 @@ function App() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [hasMore, moviesLoading]);
 
-    const handleClick = () => {
-        handleGiveIdea()
+    const handleClick = async () => {
+        setIsTransitioning(true); // Show loading immediately
+        const film = await handleGiveIdea();
+        if (film?.id) {
+            // Hard reload to the new film page
+            window.location.href = `/film/${film.id}`;
+        } else {
+            setIsTransitioning(false); // Reset if no film was found
+        }
     }
 
     return (
         <div className={'main'}>
             <Header/>
             {
-                loading ? (
+                (giveIdeaLoading || isTransitioning) ? (
                     <Loading />
                 ) : (
                     <>

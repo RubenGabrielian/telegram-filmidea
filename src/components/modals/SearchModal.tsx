@@ -22,11 +22,12 @@ interface Movie {
 }
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
-    const {handleGiveIdea, loading} = useGiveIdea();
+    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
     useEffect(() => {
         if (debouncedSearchTerm) {
@@ -45,13 +46,20 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
     }, [isOpen]);
 
     useEffect(() => {
-        if (loading) {
+        if (giveIdeaLoading) {
             setOpen(false)
         }
-    }, [loading]);
+    }, [giveIdeaLoading]);
 
-    const handleGiveMeIdeaByGenre = (id?: number) => {
-        handleGiveIdea(id);
+    const handleGiveMeIdeaByGenre = async (id?: number) => {
+        setIsTransitioning(true); // Show loading immediately
+        const film = await handleGiveIdea(id);
+        if (film?.id) {
+            // Hard reload to the new film page
+            window.location.href = `/film/${film.id}`;
+        } else {
+            setIsTransitioning(false); // Reset if no film was found
+        }
     }
 
     return (
@@ -135,11 +143,11 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                 </div>
             ) : null
             }
-            {
-                loading ? <div className={'loading'}>
+            {(giveIdeaLoading || isTransitioning) ? (
+                <div className={'loading'}>
                     <Loading/>
-                </div> : null
-            }
+                </div>
+            ) : null}
         </div>
     )
 }

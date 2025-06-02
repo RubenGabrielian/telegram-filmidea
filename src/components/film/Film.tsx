@@ -14,27 +14,28 @@ import MoviePlaceholderIcon from '../svgs/MoviePlaceholderIcon';
 
 export default function FilmView({film, setFilm, isLoading}: { film: any, setFilm: any, isLoading: boolean }) {
     const [iframe, setIframe] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [isChanging, setIsChanging] = useState(false);
-    const [prevFilmId, setPrevFilmId] = useState<number | null>(null);
+    const [loading, setLoading] = useState(true);
+    const [currentFilm, setCurrentFilm] = useState<any>(null);
 
     const miniAppURL = `https://t.me/filmidea_bot?startapp=${film?.id}`
 
     useEffect(() => {
-        if(!film) {
+        if (!film) {
             setLoading(true);
-        } else {
-            setLoading(false);
-            // Check if film ID has changed
-            if (prevFilmId !== film.id) {
-                setIsChanging(true);
-                setPrevFilmId(film.id);
-                // Short timeout to ensure smooth transition
-                setTimeout(() => {
-                    setIsChanging(false);
-                }, 150);
-            }
+            setCurrentFilm(null);
+            return;
         }
+
+        // Always show loading for 1 second when film changes
+        setLoading(true);
+        setCurrentFilm(null);
+
+        const timer = setTimeout(() => {
+            setCurrentFilm(film);
+            setLoading(false);
+        }, 1000);
+
+        return () => clearTimeout(timer);
     }, [film]);
 
     const handlePlay = () => {
@@ -84,47 +85,35 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
 
     return (
         <div className={'film container px-6 pb-[120px] relative font-sans'}>
-            {
-                (isLoading || (isChanging && !film)) ? (
-                    <div className="fixed inset-0 bg-black h-full z-50 flex items-center justify-center">
-                        <Loading />
+            {(isLoading || loading) && (
+                <div className="fixed inset-0 bg-black h-full z-50 flex items-center justify-center">
+                    <Loading />
+                </div>
+            )}
+            {iframe && (
+                <div className={'iframe-modal'}>
+                    <div className="close" onClick={()=>setIframe(null)}>
+                        <CloseIcon />
                     </div>
-                ) : null
-            }
-            {
-                iframe ? (
-                    <div className={'iframe-modal'}>
-                        <div className="close" onClick={()=>setIframe(null)}>
-                            <CloseIcon />
-                        </div>
-                        <iframe src={iframe} frameBorder="0"></iframe>
-                    </div>
-                ) : null
-            }
-            {
-                loading && (
-                    <div className="fixed inset-0 bg-black z-50 flex h-full items-center justify-center">
-                        <Loading />
-                    </div>
-                )
-            }
-            {film && (
+                    <iframe src={iframe} frameBorder="0"></iframe>
+                </div>
+            )}
+            {currentFilm && !loading && (
                 <>
-                    <h1 className={'text-xl font-bold mb-1 pb-0'}>{film?.name || film?.alternative_name}</h1>
+                    <h1 className={'text-xl font-bold mb-1 pb-0'}>{currentFilm?.name || currentFilm?.alternative_name}</h1>
                     <div className="genres flex gap-3 mb-3 flex-wrap">
                         {
-                            // @ts-ignore
-                            film?.genres?.map((genre, index) => (
+                            currentFilm?.genres?.map((genre: any, index: number) => (
                                 <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
                             ))
                         }
-                        <div className={'genre text-[#B3BBC4]'}>{film?.movie_length} мин.</div>
+                        <div className={'genre text-[#B3BBC4]'}>{currentFilm?.movie_length} мин.</div>
                     </div>
                     <div className="poster">
-                        {film?.poster?.kp_preview_url ? (
+                        {currentFilm?.poster?.kp_preview_url ? (
                             <img 
-                                src={film.poster.kp_preview_url} 
-                                alt={film.name || film.alternative_name}
+                                src={currentFilm.poster.kp_preview_url} 
+                                alt={currentFilm.name || currentFilm.alternative_name}
                             />
                         ) : (
                             <div className="w-full h-full bg-[#181818] flex items-center justify-center">
@@ -136,21 +125,21 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         </div>
                     </div>
 
-                    {film?.partner_ratings && film.partner_ratings.length > 0 && (
+                    {currentFilm?.partner_ratings && currentFilm.partner_ratings.length > 0 && (
                         <div className="info-blocks mt-6">
-                            {film.partner_ratings[0] && (
+                            {currentFilm.partner_ratings[0] && (
                                 <div className="info-block">
                                     <div className="rating text-white text-xl">
-                                        {film.partner_ratings[0].rating}
+                                        {currentFilm.partner_ratings[0].rating}
                                         <span className="partner text-[#8E9BA7] ml-1">/10</span>
                                     </div>
-                                    <div className="text-[#8E9BA7] text-sm mt-1">Filmidea</div>
+                                    <div className="text-[#8E9BA7] text-sm mt-1">Кинопоиск</div>
                                 </div>
                             )}
-                            {film.partner_ratings[1] && (
+                            {currentFilm.partner_ratings[1] && (
                                 <div className="info-block">
                                     <div className="rating text-white text-xl">
-                                        {film.partner_ratings[1].rating}
+                                        {currentFilm.partner_ratings[1].rating}
                                         <span className="partner text-[#8E9BA7] ml-1">/10</span>
                                     </div>
                                     <div className="text-[#8E9BA7] text-sm mt-1">IMDb</div>
@@ -161,14 +150,14 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
 
                     <div className="actions">
                         <div className="action-btn" onClick={handleBookmark}>
-                            <BookmarkIcon active={!!film?.is_default_watchlist} className="w-8 h-8" />
+                            <BookmarkIcon active={!!currentFilm?.is_default_watchlist} className="w-8 h-8" />
                         </div>
                         <div className="action-btn">
                             <a
                                 href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent(
                                     `🎬 Рекомендую посмотреть этот фильм!\n\n Выбери, где смотреть:\n` +
                                     `Открыть в Telegram: ${miniAppURL}\n` +
-                                    `Смотреть в браузере: https://filmidea.tv/ru/movie/${film?.id}\n\n` +
+                                    `Смотреть в браузере: https://filmidea.tv/ru/movie/${currentFilm?.id}\n\n` +
                                     `Приятного просмотра! 🍿`
                                 )}`}
                             >
@@ -191,13 +180,13 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         </div>
                     </div>
                     {
-                        film?.description && (
+                        currentFilm?.description && (
                             <div className="description bg-[#0F1017] p-4 mt-9 rounded-md">
-                            <p className={'mb-3'}>
-                                <b className='text-white'>Описание</b>
-                            </p>
-                            <p className={'text-[#8E9BA7]'}>{film?.description}</p>
-                        </div>
+                                <p className={'mb-3'}>
+                                    <b className='text-white'>Описание</b>
+                                </p>
+                                <p className={'text-[#8E9BA7]'}>{currentFilm?.description}</p>
+                            </div>
                         )
                     }
                 </>

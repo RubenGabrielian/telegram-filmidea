@@ -1,28 +1,23 @@
 import {useState} from 'react';
-import {useNavigate} from 'react-router-dom';
 import axiosInstance from "../api/axiosInstance.ts";
 
 const useGiveIdea = () => {
     const [loading, setLoading] = useState(false);
     const [film, setFilm] = useState(null);
-    const navigate = useNavigate();
 
-    const handleGiveIdea = (id?: number) => {
-        console.log(id);
-        
+    const handleGiveIdea = async (id?: number) => {
         setLoading(true);
-        axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
-            headers: {
-                "X-localization": "ru",
-            }
-        })
-            .then((response) => {
-                setFilm(response.data.data);
-                navigate(`/film/${response.data.data.id}`);
-            })
-            .finally(() => {
-                setLoading(false);  // Set loading to false after completion
+        try {
+            const response = await axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
+                headers: {
+                    "X-localization": "ru",
+                }
             });
+            setFilm(response.data.data);
+            return response.data.data;
+        } finally {
+            setLoading(false);
+        }
     };
 
     return {handleGiveIdea, loading, film};
