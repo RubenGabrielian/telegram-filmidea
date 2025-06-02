@@ -135,6 +135,30 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                             <PlayIcon/>
                         </div>
                     </div>
+
+                    {film?.partner_ratings && film.partner_ratings.length > 0 && (
+                        <div className="info-blocks mt-6">
+                            {film.partner_ratings[0] && (
+                                <div className="info-block">
+                                    <div className="rating text-white text-xl">
+                                        {film.partner_ratings[0].rating}
+                                        <span className="partner text-[#8E9BA7] ml-1">/10</span>
+                                    </div>
+                                    <div className="text-[#8E9BA7] text-sm mt-1">Filmidea</div>
+                                </div>
+                            )}
+                            {film.partner_ratings[1] && (
+                                <div className="info-block">
+                                    <div className="rating text-white text-xl">
+                                        {film.partner_ratings[1].rating}
+                                        <span className="partner text-[#8E9BA7] ml-1">/10</span>
+                                    </div>
+                                    <div className="text-[#8E9BA7] text-sm mt-1">IMDb</div>
+                                </div>
+                            )}
+                        </div>
+                    )}
+
                     <div className="actions">
                         <div className="action-btn" onClick={handleBookmark}>
                             <BookmarkIcon active={!!film?.is_default_watchlist} className="w-8 h-8" />
