@@ -124,12 +124,10 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         {film?.poster?.kp_preview_url ? (
                             <img 
                                 src={film.poster.kp_preview_url} 
-                                width={'100%'} 
                                 alt={film.name || film.alternative_name}
-                                className="w-full aspect-[2/3] object-cover"
                             />
                         ) : (
-                            <div className="w-full aspect-[2/3] bg-[#181818] flex items-center justify-center">
+                            <div className="w-full h-full bg-[#181818] flex items-center justify-center">
                                 <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
                             </div>
                         )}
@@ -150,7 +148,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                             </a>
                         </div>
                     </div>
-                    <div className="emojies flex items-center justify-between">
+                    <div className="emojies mb-4 flex items-center justify-between">
                         <div className={getEmojiClass('bad')} onClick={() => handleRate('bad')}>
                             <img src={Emoji1} alt=""/>
                         </div>
@@ -164,12 +162,16 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                             <img src={Emoji4} alt=""/>
                         </div>
                     </div>
-                    <div className="description bg-[#0F1017] p-4 mt-9 rounded-md">
-                        <p className={'mb-3'}>
-                            <b className='text-white'>Описание</b>
-                        </p>
-                        <p className={'text-[#8E9BA7]'}>{film?.description}</p>
-                    </div>
+                    {
+                        film?.description && (
+                            <div className="description bg-[#0F1017] p-4 mt-9 rounded-md">
+                            <p className={'mb-3'}>
+                                <b className='text-white'>Описание</b>
+                            </p>
+                            <p className={'text-[#8E9BA7]'}>{film?.description}</p>
+                        </div>
+                        )
+                    }
                 </>
             )}
         </div>
