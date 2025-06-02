@@ -36,9 +36,9 @@ export default function Footer() {
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
                 <ul>
                     <li>
-                        <Link to={'/'} >
+                        <a href='/' >
                             <HomeIcon active={location.pathname === '/'}/>
-                        </Link>
+                        </a>
                     </li>
                     <li>
                         <div className={'logo'} onClick={giveMeIdeaHandler}>
