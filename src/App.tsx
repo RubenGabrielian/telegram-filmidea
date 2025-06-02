@@ -38,6 +38,8 @@ function App() {
     const [activeTab, setActiveTab] = useState<'watchlist' | 'watched'>('watchlist');
     const [movies, setMovies] = useState<Movie[]>([]);
     const [moviesLoading, setMoviesLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         // Handle theme
@@ -83,27 +85,58 @@ function App() {
     }, [location.pathname]);
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        // Reset pagination when tab changes
+        setCurrentPage(1);
+        setMovies([]);
+        setHasMore(true);
+    }, [activeTab]);
+
+    useEffect(() => {
+        const fetchMovies = async (page: number) => {
+            if (!hasMore || moviesLoading) return;
+            
             setMoviesLoading(true);
             try {
                 const endpoint = activeTab === 'watchlist' 
-                    ? 'https://devback.filmidea.tv/api/v1/telegram/default/watchlist'
-                    : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
+                    ? `https://devback.filmidea.tv/api/v1/telegram/default/watchlist?page=${page}`
+                    : `https://devback.filmidea.tv/api/v1/telegram/users/watched?page=${page}`;
+                
                 const response = await AxiosInstance.get(endpoint);
-                setMovies(activeTab === 'watchlist' 
-                    ? response?.data?.data?.data || []
-                    : response?.data?.data?.data || []
-                );
+                const newMovies = response?.data?.data?.data || [];
+
+                // For both tabs, append new movies and check if there are more
+                setMovies(prev => page === 1 ? newMovies : [...prev, ...newMovies]);
+                setHasMore(newMovies.length > 0);
             } catch (error) {
                 console.error('Error fetching movies:', error);
                 setMovies([]);
+                setHasMore(false);
             } finally {
                 setMoviesLoading(false);
             }
         };
 
-        fetchMovies();
-    }, [activeTab]);
+        fetchMovies(currentPage);
+    }, [activeTab, currentPage]);
+
+    // Update scroll handler to work for both tabs
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!hasMore || moviesLoading) return;
+
+            const scrollHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.scrollY || document.documentElement.scrollTop;
+            const clientHeight = document.documentElement.clientHeight;
+
+            // Load more when user is near the bottom (within 100px)
+            if (scrollHeight - scrollTop - clientHeight < 100) {
+                setCurrentPage(prev => prev + 1);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [hasMore, moviesLoading]);
 
     const handleClick = () => {
         handleGiveIdea()
@@ -133,7 +166,7 @@ function App() {
                             </div>
 
                             <div className="movies-list">
-                                {moviesLoading ? (
+                                {moviesLoading && currentPage === 1 ? (
                                     <Loading />
                                 ) : movies.length > 0 ? (
                                     <div className="grid grid-home">
@@ -169,6 +202,11 @@ function App() {
                                                 'Здесь появятся просмотренные вами фильмы.'
                                             )
                                         }
+                                    </div>
+                                )}
+                                {moviesLoading && currentPage > 1 && (
+                                    <div className="flex justify-center p-4">
+                                        <Loading />
                                     </div>
                                 )}
                             </div>
