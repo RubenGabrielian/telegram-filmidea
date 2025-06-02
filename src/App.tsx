@@ -42,7 +42,6 @@ function App() {
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
 
-    
     useEffect(() => {
         // Handle theme
         const setTheme = () => {
@@ -57,14 +56,18 @@ function App() {
         WebApp.onEvent('themeChanged', setTheme);
 
         // Handle start param and auth
-        const startParam = WebApp.initDataUnsafe?.start_param;
+        const urlParams = new URLSearchParams(window.location.search);
+        const startParam = urlParams.get('startapp');
         if(startParam) {
-            // Immediately remove start_param from URL
-            const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
-            window.history.replaceState({}, '', newUrl);
-            
-            // Navigate to the film
+            // First navigate to the film
             navigate(`/film/${startParam}`, { replace: false });
+            
+            // After a short delay, clear the start_param
+            setTimeout(() => {
+                // Remove start_param from URL without triggering a reload
+                const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
+                window.history.replaceState({}, '', newUrl);
+            }, 1000);
         }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
