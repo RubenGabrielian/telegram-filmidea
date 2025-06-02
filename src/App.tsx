@@ -41,6 +41,7 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [hasProcessedStartParam, setHasProcessedStartParam] = useState(false);
 
     useEffect(() => {
         // Handle theme
@@ -57,11 +58,12 @@ function App() {
 
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
-        if(startParam) {
+        if(startParam && !hasProcessedStartParam) {
+            setHasProcessedStartParam(true);
             // First navigate to the film
             navigate(`/film/${startParam}`, { replace: false });
             
-            // After a short delay, clear the start_param
+            // After a short delay, clear the start_param from URL
             setTimeout(() => {
                 // Remove start_param from URL without triggering a reload
                 const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
