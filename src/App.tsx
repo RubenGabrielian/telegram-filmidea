@@ -57,12 +57,15 @@ function App() {
 
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
-        if(startParam && location.pathname === '/') {
+        if(startParam) {
             // Navigate to film and remove start_param from URL
             navigate(`/film/${startParam}`, { replace: true });
             // Remove start_param from URL without triggering a reload
             const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
             window.history.replaceState({}, '', newUrl);
+            // Clear the start_param from Telegram's stored data
+            WebApp.close();
+            WebApp.openTelegramLink(`https://t.me/filmidea_bot`);
         }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
