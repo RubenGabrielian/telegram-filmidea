@@ -59,7 +59,7 @@ function App() {
         const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam) {
             // First navigate to the film
-            navigate(`/film/${startParam}`, { replace: true });
+            navigate(`/film/${startParam}`, { replace: false });
             
             // After a short delay, clear the start_param
             setTimeout(() => {
