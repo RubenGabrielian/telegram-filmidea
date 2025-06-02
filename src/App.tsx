@@ -57,7 +57,11 @@ function App() {
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam && location.pathname === '/') {
+            // Navigate to film and remove start_param from URL
             navigate(`/film/${startParam}`, { replace: true });
+            // Remove start_param from URL without triggering a reload
+            const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
+            window.history.replaceState({}, '', newUrl);
         }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
