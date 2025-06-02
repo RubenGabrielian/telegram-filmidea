@@ -195,7 +195,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
 
                     {
                         currentFilm?.description && (
-                            <div className="description bg-[#0F1017] p-4 mt-9 rounded-md">
+                            <div className="description bg-[#0F1017] p-4  rounded-md">
                                 <p className={'mb-3'}>
                                     <b className='text-white'>Описание</b>
                                 </p>

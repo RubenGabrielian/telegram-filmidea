@@ -33,7 +33,6 @@ export default function Footer() {
     const handleHomeClick = (e: React.MouseEvent) => {
         e.preventDefault();
         // Close current WebApp and open fresh bot link to clear startapp
-        WebApp.close();
         WebApp.openTelegramLink('https://t.me/filmidea_bot');
     };
 
