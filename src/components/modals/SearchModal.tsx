@@ -108,7 +108,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                                         </div>
                                                     )}
                                                     <h3 className="text-sm font-medium mt-2 line-clamp-2 text-center">
-                                                        {movie.alternative_name}
+                                                        {movie.name}
                                                     </h3>
                                                 </a>
                                             </div>
