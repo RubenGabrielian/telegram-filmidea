@@ -98,11 +98,30 @@ function App() {
         setCurrentPage(1);
         setMovies([]);
         setHasMore(true);
+        // Reset scroll position to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        // Trigger immediate fetch for the new tab
+        setMoviesLoading(true);
+        const endpoint = activeTab === 'watchlist' 
+            ? `https://devback.filmidea.tv/api/v1/telegram/default/watchlist?page=1`
+            : `https://devback.filmidea.tv/api/v1/telegram/users/watched?page=1`;
+        
+        AxiosInstance.get(endpoint).then((response) => {
+            const newMovies = response?.data?.data?.data || [];
+            setMovies(newMovies);
+            setHasMore(newMovies.length > 0);
+        }).catch((error) => {
+            console.error('Error fetching movies:', error);
+            setMovies([]);
+            setHasMore(false);
+        }).finally(() => {
+            setMoviesLoading(false);
+        });
     }, [activeTab]);
 
     useEffect(() => {
         const fetchMovies = async (page: number) => {
-            if (!hasMore || moviesLoading) return;
+            if (!hasMore || moviesLoading || page === 1) return; // Skip if it's page 1 (handled by tab change)
             
             setMoviesLoading(true);
             try {
@@ -114,11 +133,10 @@ function App() {
                 const newMovies = response?.data?.data?.data || [];
 
                 // For both tabs, append new movies and check if there are more
-                setMovies(prev => page === 1 ? newMovies : [...prev, ...newMovies]);
+                setMovies(prev => [...prev, ...newMovies]);
                 setHasMore(newMovies.length > 0);
             } catch (error) {
                 console.error('Error fetching movies:', error);
-                setMovies([]);
                 setHasMore(false);
             } finally {
                 setMoviesLoading(false);

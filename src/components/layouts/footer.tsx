@@ -7,7 +7,7 @@ import useGiveIdea from "../../hooks/useGiveIdea.tsx";
 import {useState} from "react";
 import SearchModal from "../modals/SearchModal.tsx";
 import Loading from '../Loading/index.tsx';
-import {WebApp} from "@telegram/web-app";
+import WebApp from "@twa-dev/sdk";
 
 export default function Footer() {
     const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();

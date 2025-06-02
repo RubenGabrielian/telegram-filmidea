@@ -26,16 +26,22 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             return;
         }
 
-        // Always show loading for 1 second when film changes
-        setLoading(true);
-        setCurrentFilm(null);
+        // Only show loading if the film ID changed (new film loaded)
+        // Not when just the bookmark status changes
+        if (!currentFilm || currentFilm.id !== film.id) {
+            setLoading(true);
+            setCurrentFilm(null);
 
-        const timer = setTimeout(() => {
+            const timer = setTimeout(() => {
+                setCurrentFilm(film);
+                setLoading(false);
+            }, 1000);
+
+            return () => clearTimeout(timer);
+        } else {
+            // Just update the current film without loading for bookmark changes
             setCurrentFilm(film);
-            setLoading(false);
-        }, 1000);
-
-        return () => clearTimeout(timer);
+        }
     }, [film]);
 
     const handlePlay = () => {
@@ -49,15 +55,22 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     }
 
     const handleBookmark = () => {
-        axiosInstance.post(`/telegram/films/${film.id}/default/watchlist`).then((res) => {
-            if(res.data.success) {
-                const updatedFilm = {
-                    ...film,
-                    is_default_watchlist: !film?.is_default_watchlist
-                };
+        // Update UI immediately
+        const updatedFilm = {
+            ...film,
+            is_default_watchlist: !film?.is_default_watchlist
+        };
+        setFilm(updatedFilm);
 
-                setFilm(updatedFilm);
+        // Make API call in background
+        axiosInstance.post(`/telegram/films/${film.id}/default/watchlist`).then((res) => {
+            if(!res.data.success) {
+                // Revert if request failed
+                setFilm(film);
             }
+        }).catch(() => {
+            // Revert if request failed
+            setFilm(film);
         });
     }
 
