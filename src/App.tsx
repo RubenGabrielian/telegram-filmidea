@@ -35,7 +35,7 @@ function App() {
     const { handleGiveIdea, loading } = useGiveIdea();
     const navigate = useNavigate();
     const location = useLocation();
-    const [activeTab, setActiveTab] = useState<'liked' | 'watched'>('liked');
+    const [activeTab, setActiveTab] = useState<'watchlist' | 'watched'>('watchlist');
     const [movies, setMovies] = useState<Movie[]>([]);
     const [moviesLoading, setMoviesLoading] = useState(false);
 
@@ -86,11 +86,11 @@ function App() {
         const fetchMovies = async () => {
             setMoviesLoading(true);
             try {
-                const endpoint = activeTab === 'liked' 
-                    ? 'https://devback.filmidea.tv/api/v1/telegram/users/favorites'
+                const endpoint = activeTab === 'watchlist' 
+                    ? 'https://devback.filmidea.tv/api/v1/telegram/default/watchlist'
                     : 'https://devback.filmidea.tv/api/v1/telegram/users/watched';
                 const response = await AxiosInstance.get(endpoint);
-                setMovies(activeTab === 'liked' 
+                setMovies(activeTab === 'watchlist' 
                     ? response?.data?.data || []
                     : response?.data?.data?.data || []
                 );
@@ -162,7 +162,13 @@ function App() {
                                     </div>
                                 ) : (
                                     <div className="text-center p-8 text-gray-500">
-                                        No {activeTab} movies yet
+                                        {
+                                            activeTab === 'watchlist' ? (
+                                                'Добавляйте фильмы в закладки, чтобы они появились здесь.'
+                                            ) : (
+                                                'Здесь появятся просмотренные вами фильмы.'
+                                            )
+                                        }
                                     </div>
                                 )}
                             </div>

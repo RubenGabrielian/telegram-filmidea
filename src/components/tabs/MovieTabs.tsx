@@ -1,10 +1,10 @@
 import './movieTabs.css';
-import HeartIcon from '../svgs/HeartIcon';
+import BookmarkIcon from '../svgs/BookmarkIcon';
 import EyeIcon from '../svgs/EyeIcon';
 
 interface MovieTabsProps {
-    onTabChange: (tab: 'liked' | 'watched') => void;
-    activeTab: 'liked' | 'watched';
+    onTabChange: (tab: 'watchlist' | 'watched') => void;
+    activeTab: 'watchlist' | 'watched';
 }
 
 export default function MovieTabs({ onTabChange, activeTab }: MovieTabsProps) {
@@ -12,10 +12,10 @@ export default function MovieTabs({ onTabChange, activeTab }: MovieTabsProps) {
         <div className="movie-tabs">
             <div className="tabs-container">
                 <button 
-                    className={`tab ${activeTab === 'liked' ? 'active' : ''}`}
-                    onClick={() => onTabChange('liked')}
+                    className={`tab ${activeTab === 'watchlist' ? 'active' : ''}`}
+                    onClick={() => onTabChange('watchlist')}
                 >
-                    <HeartIcon active={activeTab === 'liked'} />
+                    <BookmarkIcon active={activeTab === 'watchlist'} />
                 </button>
                 <button 
                     className={`tab ${activeTab === 'watched' ? 'active' : ''}`}

@@ -1,6 +1,6 @@
 import './film.css'
 import PlayIcon from "../svgs/PlayIcon.tsx";
-import LikeIcon from "../Loading/LikeIcon.tsx";
+import BookmarkIcon from "../svgs/BookmarkIcon.tsx";
 import ShareIcon from "../svgs/ShareIcon.tsx";
 import Emoji1 from "../../assets/emoji1.svg";
 import Emoji2 from "../../assets/emoji2.svg";
@@ -47,12 +47,12 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
         })
     }
 
-    const handleLike = () => {
-        axiosInstance.post(`/telegram/films/${film.id}/like`).then((res) => {
+    const handleBookmark = () => {
+        axiosInstance.post(`/telegram/films/${film.id}/default/watchlist`).then((res) => {
             if(res.data.success) {
                 const updatedFilm = {
                     ...film,
-                    user_is_liked: !film?.user_is_liked
+                    is_default_watchlist: !film?.is_default_watchlist
                 };
 
                 setFilm(updatedFilm);
@@ -83,7 +83,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
     }
 
     return (
-        <div className={'film container px-6 pb-[120px] relative'}>
+        <div className={'film container px-6 pb-[120px] relative font-sans'}>
             {
                 (isLoading || (isChanging && !film)) ? (
                     <div className="fixed inset-0 bg-black h-full z-50 flex items-center justify-center">
@@ -138,8 +138,8 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         </div>
                     </div>
                     <div className="actions">
-                        <div className="like action-btn" onClick={handleLike}>
-                            <LikeIcon active={!!film?.user_is_liked}/>
+                        <div className="like action-btn" onClick={handleBookmark}>
+                            <BookmarkIcon active={!!film?.is_default_watchlist}/>
                         </div>
                         <div className="share action-btn">
                             <a
@@ -164,9 +164,9 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                             <img src={Emoji4} alt=""/>
                         </div>
                     </div>
-                    <div className="description bg-[#0F1017] p-4 rounded-md">
+                    <div className="description bg-[#0F1017] p-4 mt-9 rounded-md">
                         <p className={'mb-3'}>
-                            <b className='text-white'>Описания</b>
+                            <b className='text-white'>Описание</b>
                         </p>
                         <p className={'text-[#8E9BA7]'}>{film?.description}</p>
                     </div>
