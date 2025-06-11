@@ -114,7 +114,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
             {currentFilm && !loading && (
                 <>
                     <h1 className={'text-xl font-bold mb-1 pb-0'}>{currentFilm?.name || currentFilm?.alternative_name}</h1>
-                    <div className="genres flex gap-3 mb-3 flex-wrap">
+                    <div className="genres flex  mb-3 flex-wrap">
                         {
                             currentFilm?.genres?.map((genre: any, index: number) => (
                                 <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>

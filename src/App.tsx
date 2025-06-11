@@ -56,8 +56,7 @@ function App() {
         WebApp.onEvent('themeChanged', setTheme);
 
         // Handle start param and auth
-        const urlParams = new URLSearchParams(window.location.search);
-        const startParam = urlParams.get('startapp');
+        const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam) {
             // First navigate to the film
             navigate(`/film/${startParam}`, { replace: false });
@@ -240,7 +239,7 @@ function App() {
                                     </div>
                                 )}
                                 {moviesLoading && currentPage > 1 && (
-                                    <div className="flex justify-center p-4">
+                                    <div className="flex justify-center items-center h-[60px]">
                                         <Loading />
                                     </div>
                                 )}

@@ -31,9 +31,12 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
 
     useEffect(() => {
         if (debouncedSearchTerm) {
+            console.log(debouncedSearchTerm);
             axiosInstance.get(`/films/search?query=${query}`).then((r) => {
                 setSearchResult(r.data.data);
             })
+        } else {
+            setSearchResult([]); // Clear results when search term is empty
         }
     }, [debouncedSearchTerm]);
 
@@ -62,6 +65,11 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
         }
     }
 
+    const handleClose = () => {
+        setOpen(false);
+        setQuery(''); // Reset search query
+        setSearchResult([]); // Reset search results
+    };
     return (
         <div>
             {isOpen ? (
@@ -73,6 +81,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                className="w-full pl-10 pr-3 py-2 text-white
                                border border-gray-300 rounded-xl bg-transparent text-sm
                                focus:ring-0 focus:border-[#febb12] focus:outline-none"
+                               value={query || ''}
                                onChange={(e) => setQuery(e.target.value)}
                         />
                         <svg className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500"
@@ -82,7 +91,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                                   d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1010.5 18a7.5 7.5 0 006.15-3.35z"/>
                         </svg>
                     </div>
-                    <div className="absolute top-3 right-3" onClick={() => setOpen(false)}>
+                    <div className="absolute top-3 right-3" onClick={handleClose}>
                         <CloseIcon/>
                     </div>
 

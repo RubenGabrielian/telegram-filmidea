@@ -75,6 +75,7 @@
     .genres {
         .genre {
             position: relative;
+            padding: 0 10px;
 
             &:not(:last-child) {
                 &::after {
