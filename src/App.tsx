@@ -41,6 +41,19 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const [hasUsedStartParam, setHasUsedStartParam] = useState(false);
+
+
+    useEffect(() => {
+        const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
+    
+        if (startParam && !hasUsedStartParam) {
+          navigate(`/film/${startParam}`);
+          setHasUsedStartParam(true); // prevent re-trigger
+        }
+      }, [hasUsedStartParam, navigate]);
+    
+
 
     useEffect(() => {
         // Handle theme
@@ -54,19 +67,19 @@ function App() {
 
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
-        if(startParam) {
-            console.log('Opening from deep link, start_param:', startParam);
-            // First navigate to the film
-            navigate(`/film/${startParam}`, { replace: false });
-            console.log('Current route after navigation:', `/film/${startParam}`);
+        // if(startParam) {
+        //     console.log('Opening from deep link, start_param:', startParam);
+        //     // First navigate to the film
+        //     navigate(`/film/${startParam}`, { replace: false });
+        //     console.log('Current route after navigation:', `/film/${startParam}`);
             
-            // After a short delay, clear the start_param
-            setTimeout(() => {
-                // Remove start_param from URL without triggering a reload
-                const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
-                window.history.replaceState({}, '', newUrl);
-            }, 1000);
-        }
+        //     // After a short delay, clear the start_param
+        //     setTimeout(() => {
+        //         // Remove start_param from URL without triggering a reload
+        //         const newUrl = window.location.pathname + window.location.search.replace(/[?&]startapp=[^&]+/, '');
+        //         window.history.replaceState({}, '', newUrl);
+        //     }, 1000);
+        // }
 
         const user = WebApp?.initDataUnsafe?.user || {id: 1, first_name: 'Gago', last_name: 'Gagikyan'};
         const connectedString = user?.id + user?.first_name + user?.last_name + SECRET;
