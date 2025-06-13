@@ -50,6 +50,7 @@ function App() {
         console.log('startParam', startParam);
     
         if (startParam && !hasUsedStartParam) {
+            debugger
           navigate(`/film/${startParam}`);
           setHasUsedStartParam(true); // prevent re-trigger
         }
