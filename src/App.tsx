@@ -45,7 +45,7 @@ function App() {
 
     useEffect(() => {
         const startParam = WebApp.initDataUnsafe?.start_param;
-        const authDate = WebApp.initDataUnsafe?.auth_date; // a new session timestamp
+        const authDate = (WebApp.initDataUnsafe as { auth_date?: number })?.auth_date;
         const lastSession = localStorage.getItem('lastSession');
     
         // New session detected, clear previous startParam
