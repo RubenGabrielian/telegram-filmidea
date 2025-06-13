@@ -47,6 +47,7 @@ function App() {
     useEffect(() => {
         // @ts-ignore
         const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
+        console.log('startParam', startParam);
     
         if (startParam && !hasUsedStartParam) {
           navigate(`/film/${startParam}`);
