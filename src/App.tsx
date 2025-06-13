@@ -169,10 +169,11 @@ function App() {
                 
                 const response = await AxiosInstance.get(endpoint);
                 const newMovies = response?.data?.data?.data || [];
+                const lastPage = response?.data?.data?.meta?.last_page || 1;
 
                 // For both tabs, append new movies and check if there are more
                 setMovies(prev => [...prev, ...newMovies]);
-                setHasMore(newMovies.length > 0);
+                setHasMore(page < lastPage);
             } catch (error) {
                 console.error('Error fetching movies:', error);
                 setHasMore(false);
