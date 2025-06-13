@@ -8,7 +8,7 @@ const useGiveIdea = () => {
     const handleGiveIdea = async (id?: number) => {
         setLoading(true);
         try {
-            const response = await axiosInstance.get(`https://devback.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
+            const response = await axiosInstance.get(`https://back.filmidea.tv/api/v1/films/give-me-idea?${id ?  `genre_id=${id}` : null}`, {
                 headers: {
                     "X-localization": "ru",
                 }

@@ -13,7 +13,7 @@ const Film = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        axiosInstance(`https://devback.filmidea.tv/api/v1/films/${id}`, {
+        axiosInstance(`https://back.filmidea.tv/api/v1/films/${id}`, {
             headers: {
                 "X-localization": "ru"
             }

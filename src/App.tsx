@@ -141,8 +141,8 @@ function App() {
         // Trigger immediate fetch for the new tab
         setMoviesLoading(true);
         const endpoint = activeTab === 'watchlist' 
-            ? `https://devback.filmidea.tv/api/v1/telegram/default/watchlist?page=1`
-            : `https://devback.filmidea.tv/api/v1/telegram/users/watched?page=1`;
+            ? `https://back.filmidea.tv/api/v1/telegram/default/watchlist?page=1`
+            : `https://back.filmidea.tv/api/v1/telegram/users/watched?page=1`;
         
         AxiosInstance.get(endpoint).then((response) => {
             const newMovies = response?.data?.data?.data || [];
@@ -164,8 +164,8 @@ function App() {
             setMoviesLoading(true);
             try {
                 const endpoint = activeTab === 'watchlist' 
-                    ? `https://devback.filmidea.tv/api/v1/telegram/default/watchlist?page=${page}`
-                    : `https://devback.filmidea.tv/api/v1/telegram/users/watched?page=${page}`;
+                    ? `https://back.filmidea.tv/api/v1/telegram/default/watchlist?page=${page}`
+                    : `https://back.filmidea.tv/api/v1/telegram/users/watched?page=${page}`;
                 
                 const response = await AxiosInstance.get(endpoint);
                 const newMovies = response?.data?.data?.data || [];
@@ -260,7 +260,7 @@ function App() {
                                                         <MoviePlaceholderIcon className="w-[54px] h-[76px]" />
                                                     </div>
                                                 )}
-                                                <h3 className="text-sm font-medium mt-2 line-clamp-2">
+                                                <h3 className="text-[15px] font-medium mt-2 line-clamp-2">
                                                     {movie.name || movie.alternative_name}
                                                 </h3>
                                             </div>
