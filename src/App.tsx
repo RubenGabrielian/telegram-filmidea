@@ -45,6 +45,7 @@ function App() {
 
 
     useEffect(() => {
+        // @ts-ignore
         const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
     
         if (startParam && !hasUsedStartParam) {
@@ -66,7 +67,7 @@ function App() {
         setTheme();
 
         // Handle start param and auth
-        const startParam = WebApp.initDataUnsafe?.start_param;
+        // const startParam = WebApp.initDataUnsafe?.start_param;
         // if(startParam) {
         //     console.log('Opening from deep link, start_param:', startParam);
         //     // First navigate to the film
