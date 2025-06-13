@@ -22,7 +22,8 @@ interface Movie {
 }
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
-    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
+    const [selectedGenreId, setSelectedGenreId] = useState<number>();
+    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea(selectedGenreId);
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
@@ -55,14 +56,9 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
     }, [giveIdeaLoading]);
 
     const handleGiveMeIdeaByGenre = async (id?: number) => {
-        setIsTransitioning(true); // Show loading immediately
-        const film = await handleGiveIdea(id);
-        if (film?.id) {
-            // Hard reload to the new film page
-            window.location.href = `/film/${film.id}`;
-        } else {
-            setIsTransitioning(false); // Reset if no film was found
-        }
+        setIsTransitioning(true);
+        setSelectedGenreId(id);
+        await handleGiveIdea();
     }
 
     const handleClose = () => {
