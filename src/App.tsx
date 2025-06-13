@@ -45,19 +45,29 @@ function App() {
 
     useEffect(() => {
         const startParam = WebApp.initDataUnsafe?.start_param;
+        const authDate = WebApp.initDataUnsafe?.auth_date; // a new session timestamp
+        const lastSession = localStorage.getItem('lastSession');
+    
+        // New session detected, clear previous startParam
+        if (authDate && lastSession !== String(authDate)) {
+          localStorage.removeItem('usedStartParam');
+          localStorage.setItem('lastSession', String(authDate));
+        }
+    
         const usedStartParam = localStorage.getItem('usedStartParam');
         console.log('startParam', startParam);
     
         if (startParam && !usedStartParam) {
-            navigate(`/film/${startParam}`);
-            localStorage.setItem('usedStartParam', startParam);
-            
-            // Clear the start_param from URL without reload
-            const newUrl = window.location.pathname;
-            window.history.replaceState({}, '', newUrl);
-        }
-    }, [navigate]);
+          navigate(`/film/${startParam}`);
+          localStorage.setItem('usedStartParam', startParam);
     
+          // Remove param from URL to avoid issues on back navigation
+          const newUrl = window.location.pathname;
+          window.history.replaceState({}, '', newUrl);
+        }
+      }, [navigate]);
+
+      
     const handleClose = () => {
         console.log('close');
         localStorage.removeItem('usedStartParam');
