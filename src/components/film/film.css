@@ -80,7 +80,7 @@
                 &::after {
                     content: '•';
                     position: absolute;
-                    right: 5px;
+                    right: 6px;
                     top: 1%;
                 }
             }

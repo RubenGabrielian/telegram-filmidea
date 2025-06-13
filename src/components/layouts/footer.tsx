@@ -16,14 +16,9 @@ export default function Footer() {
     const [isTransitioning, setIsTransitioning] = useState(false);
 
     const giveMeIdeaHandler = async () => {
-        setIsTransitioning(true); // Show loading immediately
-        const film = await handleGiveIdea();
-        if (film?.id) {
-            // Hard reload to the new film page
-            window.location.href = `/film/${film.id}`;
-        } else {
-            setIsTransitioning(false); // Reset if no film was found
-        }
+        setIsTransitioning(true);
+        await handleGiveIdea();
+        // No need to handle navigation here as it's now handled in the hook
     };
 
     const handleHomeClick = (e: React.MouseEvent) => {
