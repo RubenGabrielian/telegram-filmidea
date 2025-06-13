@@ -30,6 +30,7 @@ export default function Footer() {
         setOpenSearchModal(false);
         e.preventDefault();
         navigate('/');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
     const handleOpenSearch = () => {
@@ -42,13 +43,13 @@ export default function Footer() {
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
                 <div className="flex justify-around items-center">
                     <a href="/" onClick={handleHomeClick}>
-                        <HomeIcon active={location.pathname === '/' || location.pathname === '/home'}/>
+                        <HomeIcon active={location.pathname === '/' && !openSearchModal}/>
                     </a>
                     <div className={'logo'} onClick={giveMeIdeaHandler}>
                         <LogoIcon/>
                     </div>
                     <div onClick={handleOpenSearch}>
-                        <SearchIcon/>
+                        <SearchIcon active={openSearchModal}/>
                     </div>
                 </div>
             </footer>
