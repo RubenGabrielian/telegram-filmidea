@@ -49,6 +49,9 @@ function App() {
             document.documentElement.setAttribute('data-theme', theme);
         };
 
+        // Log current route
+        console.log('Current route:', location.pathname);
+
         // Set initial theme
         setTheme();
 
