@@ -75,6 +75,7 @@ function App() {
 
         // Clear localStorage when app is closed
         const handleClose = () => {
+            console.log('close');
             localStorage.removeItem('usedStartParam');
         };
         WebApp.onEvent('close', handleClose);
