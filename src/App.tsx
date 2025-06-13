@@ -41,21 +41,22 @@ function App() {
     const [currentPage, setCurrentPage] = useState(1);
     const [hasMore, setHasMore] = useState(true);
     const [isTransitioning, setIsTransitioning] = useState(false);
-    const [hasUsedStartParam, setHasUsedStartParam] = useState(false);
 
 
     useEffect(() => {
-        // @ts-ignore
-        let startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
+        const startParam = WebApp.initDataUnsafe?.start_param;
+        const usedStartParam = localStorage.getItem('usedStartParam');
         console.log('startParam', startParam);
     
-        if (startParam && !hasUsedStartParam) {
-            debugger
-          navigate(`/film/${startParam}`);
-          setHasUsedStartParam(true); // prevent re-trigger
-          startParam = null
+        if (startParam && !usedStartParam) {
+            navigate(`/film/${startParam}`);
+            localStorage.setItem('usedStartParam', startParam);
+            
+            // Clear the start_param from URL without reload
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, '', newUrl);
         }
-      }, [hasUsedStartParam, navigate]);
+    }, [navigate]);
     
 
 
