@@ -70,6 +70,15 @@ function App() {
         // Set initial theme
         setTheme();
 
+        // Listen for theme changes
+        WebApp.onEvent('themeChanged', setTheme);
+
+        // Clear localStorage when app is closed
+        const handleClose = () => {
+            localStorage.removeItem('usedStartParam');
+        };
+        WebApp.onEvent('close', handleClose);
+
         // Handle start param and auth
         // const startParam = WebApp.initDataUnsafe?.start_param;
         // if(startParam) {
@@ -107,6 +116,7 @@ function App() {
         // Cleanup
         return () => {
             WebApp.offEvent('themeChanged', setTheme);
+            WebApp.offEvent('close', handleClose);
         };
     }, [location.pathname]);
 
