@@ -49,20 +49,16 @@ function App() {
             document.documentElement.setAttribute('data-theme', theme);
         };
 
-        // Log current route
-        console.log('Current route:', location.pathname);
-
         // Set initial theme
         setTheme();
-
-        // Listen for theme changes
-        WebApp.onEvent('themeChanged', setTheme);
 
         // Handle start param and auth
         const startParam = WebApp.initDataUnsafe?.start_param;
         if(startParam) {
+            console.log('Opening from deep link, start_param:', startParam);
             // First navigate to the film
             navigate(`/film/${startParam}`, { replace: false });
+            console.log('Current route after navigation:', `/film/${startParam}`);
             
             // After a short delay, clear the start_param
             setTimeout(() => {
