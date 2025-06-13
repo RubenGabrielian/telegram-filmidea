@@ -46,13 +46,14 @@ function App() {
 
     useEffect(() => {
         // @ts-ignore
-        const startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
+        let startParam = window.Telegram?.WebApp?.initDataUnsafe?.start_param;
         console.log('startParam', startParam);
     
         if (startParam && !hasUsedStartParam) {
             debugger
           navigate(`/film/${startParam}`);
           setHasUsedStartParam(true); // prevent re-trigger
+          startParam = null
         }
       }, [hasUsedStartParam, navigate]);
     
