@@ -164,8 +164,8 @@ function App() {
             setMoviesLoading(true);
             try {
                 const endpoint = activeTab === 'watchlist' 
-                    ? `https://back.filmidea.tv/api/v1/telegram/default/watchlist?page=${page}`
-                    : `https://back.filmidea.tv/api/v1/telegram/users/watched?page=${page}`;
+                    ? `https://back.filmidea.tv/api/v1/telegram/default/watchlist?page=${currentPage}`
+                    : `https://back.filmidea.tv/api/v1/telegram/users/watched?page=${currentPage}`;
                 
                 const response = await AxiosInstance.get(endpoint);
                 const newMovies = response?.data?.data?.data || [];
