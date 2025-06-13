@@ -146,7 +146,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                         <div className="action-btn">
                             <a
                                 href={`https://t.me/share/url?url=${encodeURIComponent(miniAppURL)}&text=${encodeURIComponent(
-                                    `🎬 Рекомендую посмотреть этот фильм!\n\n Выбери, где смотреть ⬇️ \n` +
+                                    `🎬 Рекомендую посмотреть этот фильм!\n\n Выбери, где смотреть ⬇️ \n\n` +
                                     `📌 Открыть в Telegram:\n ${miniAppURL}\n` +
                                     `🌐 Смотреть в браузере: \n https://filmidea.tv/ru/movie/${currentFilm?.id}\n\n` +
                                     `Приятного просмотра! 🍿`
