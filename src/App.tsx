@@ -240,7 +240,9 @@ function App() {
                                 )}
                                 {moviesLoading && currentPage > 1 && (
                                     <div className="flex justify-center items-center h-[60px]">
-                                        <Loading />
+                                       <div className="loading-circle">
+                                            <div className="loading-circle-inner"></div>
+                                        </div>
                                     </div>
                                 )}
                             </div>

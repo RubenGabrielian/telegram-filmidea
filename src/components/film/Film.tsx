@@ -120,7 +120,7 @@ export default function FilmView({film, setFilm, isLoading}: { film: any, setFil
                                 <div key={index} className={'genre text-[#B3BBC4]'}>{genre.name}</div>
                             ))
                         }
-                        <div className={'genre text-[#B3BBC4]'}>{currentFilm?.movie_length} мин.</div>
+                        <div className={'genre genre-time text-[#B3BBC4]'}>{currentFilm?.movie_length} мин.</div>
                     </div>
                     <div className="poster">
                         {currentFilm?.poster?.kp_preview_url ? (

@@ -75,17 +75,20 @@
     .genres {
         .genre {
             position: relative;
-            padding: 0 10px;
 
             &:not(:last-child) {
                 &::after {
                     content: '•';
                     position: absolute;
-                    right: -9px;
-                    top: 7%;
+                    right: 5px;
+                    top: 1%;
                 }
             }
+
+            padding-right: 20px;
         }
+
+        .genre-time {}
     }
 
     .actions {

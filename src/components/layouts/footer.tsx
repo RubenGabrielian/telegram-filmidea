@@ -27,6 +27,7 @@ export default function Footer() {
     };
 
     const handleHomeClick = (e: React.MouseEvent) => {
+        setOpenSearchModal(false);
         e.preventDefault();
         navigate('/');
     };
@@ -39,7 +40,7 @@ export default function Footer() {
         <>
             {(giveIdeaLoading || isTransitioning) && <div className={'loading'}><Loading /></div>}
             <footer className={'fixed bottom-[0] left-[50%] translate-x-[-50%] container mx-auto px-5'}>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-around items-center">
                     <a href="/" onClick={handleHomeClick}>
                         <HomeIcon active={location.pathname === '/' || location.pathname === '/home'}/>
                     </a>
