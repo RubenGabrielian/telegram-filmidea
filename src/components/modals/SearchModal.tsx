@@ -96,7 +96,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
                     </div>
 
                     <div
-                        className={'flex flex-wrap justify-center container mx-auto px-10 mt-10 overflow-auto max-h-[80vh]'}>
+                        className={'flex flex-wrap justify-center container mx-auto px-10 mt-10 overflow-auto max-h-[80vh] pb-[100px]'}>
                         {
                             !searchResult.length ? (
                                 <div
