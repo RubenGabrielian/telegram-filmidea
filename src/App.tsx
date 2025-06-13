@@ -58,7 +58,11 @@ function App() {
         }
     }, [navigate]);
     
-
+    const handleClose = () => {
+        console.log('close');
+        localStorage.removeItem('usedStartParam');
+    };
+    WebApp.onEvent('close', handleClose);
 
     useEffect(() => {
         // Handle theme
@@ -74,11 +78,7 @@ function App() {
         WebApp.onEvent('themeChanged', setTheme);
 
         // Clear localStorage when app is closed
-        const handleClose = () => {
-            console.log('close');
-            localStorage.removeItem('usedStartParam');
-        };
-        WebApp.onEvent('close', handleClose);
+
 
         // Handle start param and auth
         // const startParam = WebApp.initDataUnsafe?.start_param;
