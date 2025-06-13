@@ -22,8 +22,7 @@ interface Movie {
 }
 
 export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpen: (isOpen: boolean) => void }) {
-    const [selectedGenreId, setSelectedGenreId] = useState<number>();
-    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea(selectedGenreId);
+    const {handleGiveIdea, loading: giveIdeaLoading} = useGiveIdea();
     const [query, setQuery] = useState<string>();
     const debouncedSearchTerm = useDebounce(query, 400);
     const [searchResult, setSearchResult] = useState([]);
@@ -57,8 +56,7 @@ export default function SearchModal({isOpen, setOpen}: { isOpen: boolean, setOpe
 
     const handleGiveMeIdeaByGenre = async (id?: number) => {
         setIsTransitioning(true);
-        setSelectedGenreId(id);
-        await handleGiveIdea();
+        await handleGiveIdea(id);
     }
 
     const handleClose = () => {
